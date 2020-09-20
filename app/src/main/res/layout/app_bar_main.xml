@@ -3,384 +3,398 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorLighterGrey"
-        tools:context=".MainActivity">
+        android:background="@color/colorLighterGrey">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/app_bar_main">
-
-
-            <TextView
-                android:id="@+id/greetingTextView"
-                style="@style/TextAppearance.MdcTypographyStyles.Body0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Good Morning,"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/dateTextView"
-                style="@style/TextAppearance.MdcTypographyStyles.Headline7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="September 20, 2020"
-                app:layout_constraintBottom_toBottomOf="@+id/materialCardView4"
-                app:layout_constraintEnd_toStartOf="@+id/materialCardView4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/greetingTextView" />
-
+            android:layout_above="@+id/adLayout"
+            tools:context=".MainActivity">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/socialConstraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/gray_bg"
-                android:orientation="horizontal"
-                android:padding="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateTextView">
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:showIn="@layout/app_bar_main">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView2"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="10dp"
-                    android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    android:onClick="@{viewmodel::onFacebookClicked}"
-                    app:cardBackgroundColor="#1E242D"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="3dp"
+
+                <TextView
+                    android:id="@+id/greetingTextView"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Good Morning,"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/fbImageView"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/nav_header_desc"
-                        app:srcCompat="@drawable/fb" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    android:onClick="@{viewmodel::onInstagramClicked}"
-                    app:cardBackgroundColor="#1E242D"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="3dp"
-                    app:layout_constraintEnd_toStartOf="@+id/materialCardView"
-                    app:layout_constraintStart_toEndOf="@+id/materialCardView2"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/instagramImageView"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/nav_header_desc"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/insta" />
-
-                </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/dateTextView"
+                    style="@style/TextAppearance.MdcTypographyStyles.Headline7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="September 20, 2020"
+                    app:layout_constraintBottom_toBottomOf="@+id/materialCardView4"
+                    app:layout_constraintEnd_toStartOf="@+id/materialCardView4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/greetingTextView" />
 
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="10dp"
-                    android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    android:onClick="@{viewmodel::onTwitterClicked}"
-                    app:cardBackgroundColor="#1E242D"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/twitterImageView"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/nav_header_desc"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/twiter" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="match_parent"
-                android:layout_height="310dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/gray_bg"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/socialConstraintLayout">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView6"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/socialConstraintLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/gray_bg"
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dateTextView">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView2"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="10dp"
+                        android:paddingTop="@dimen/nav_header_vertical_spacing"
+                        android:onClick="@{viewmodel::onFacebookClicked}"
+                        app:cardBackgroundColor="#1E242D"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/fbImageView"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/nav_header_desc"
+                            app:srcCompat="@drawable/fb" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:paddingTop="@dimen/nav_header_vertical_spacing"
+                        android:onClick="@{viewmodel::onInstagramClicked}"
+                        app:cardBackgroundColor="#1E242D"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toStartOf="@+id/materialCardView"
+                        app:layout_constraintStart_toEndOf="@+id/materialCardView2"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/instagramImageView"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/nav_header_desc"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/insta" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="10dp"
+                        android:paddingTop="@dimen/nav_header_vertical_spacing"
+                        android:onClick="@{viewmodel::onTwitterClicked}"
+                        app:cardBackgroundColor="#1E242D"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/twitterImageView"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/nav_header_desc"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/twiter" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/gray_bg"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/socialConstraintLayout">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="@dimen/nav_header_vertical_spacing"
+                        app:cardBackgroundColor="#40000000"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/bgImageView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/nav_header_desc"
+                                android:scaleType="centerCrop"
+                                app:srcCompat="@drawable/kantipur" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:contentDescription="@string/nav_header_desc"
+                                android:scaleType="centerCrop"
+                                app:srcCompat="@drawable/gradient_bg" />
+
+                        </RelativeLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView5"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="15dp"
+                        android:paddingTop="@dimen/nav_header_vertical_spacing"
+                        app:cardBackgroundColor="#40000000"
+                        app:cardCornerRadius="15dp"
+                        android:onClick="@{viewmodel::onReportStreamClicked}"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/reportImageView"
+                            android:layout_width="20dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/nav_header_desc"
+                            app:srcCompat="@drawable/ic_flag" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView4"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    app:cardBackgroundColor="#40000000"
+                    app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="3dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <RelativeLayout
+                    <ImageView
+                        android:id="@+id/imageView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/bgImageView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:contentDescription="@string/nav_header_desc"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/kantipur" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:contentDescription="@string/nav_header_desc"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/gradient_bg" />
-
-                    </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/nav_header_desc"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/kantipur" />
 
                 </com.google.android.material.card.MaterialCardView>
 
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.3"
+                    android:visibility="visible"
+                    android:layout_marginTop="60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="equalizer.json"
+                    app:lottie_loop="true" />
+
+                <TextView
+                    android:id="@+id/radioNameTextView"
+                    style="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/animation_view"
+                    android:text="Radio Kantipur" />
+
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock  "
+                    android:textColor="#BDBDBD"
+                    app:layout_constraintEnd_toEndOf="@+id/radioNameTextView"
+                    app:layout_constraintStart_toStartOf="@+id/radioNameTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/radioNameTextView" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/textView3"
+                    app:layout_constraintStart_toStartOf="@+id/textView3"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+
+
+                    <TextView
+                        android:id="@+id/genreTextView"
+                        style="@style/TextAppearance.MdcTypographyStyles.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="Classic Rock" />
+
+
+                    <ImageView
+                        android:id="@+id/dot"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="10dp"
+                        app:srcCompat="@drawable/ic_dot_white" />
+
+                    <TextView
+                        android:id="@+id/countryTextView"
+                        style="@style/TextAppearance.MdcTypographyStyles.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="England" />
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_exit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_play"
+                    android:text="@string/play"
+                    android:layout_marginTop="10dp"
+                    app:backgroundTint="@color/colorBlueText"
+                    app:cornerRadius="10dp"
+                    android:paddingStart="30dp"
+                    android:onClick="@{viewmodel::onPlayClicked}"
+                    android:paddingEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView5"
+                    android:id="@+id/materialCardView7"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="15dp"
+                    android:onClick="@{viewmodel::onSetTimerClicked}"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    app:cardBackgroundColor="#40000000"
+                    app:cardBackgroundColor="#1E242D"
                     app:cardCornerRadius="15dp"
-                    android:onClick="@{viewmodel::onReportStreamClicked}"
                     app:cardElevation="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_exit"
+                    app:layout_constraintStart_toEndOf="@+id/btn_exit"
+                    app:layout_constraintTop_toTopOf="@+id/btn_exit">
 
                     <ImageView
-                        android:id="@+id/reportImageView"
+                        android:id="@+id/timerImageView"
                         android:layout_width="20dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:contentDescription="@string/nav_header_desc"
-                        app:srcCompat="@drawable/ic_flag" />
+                        app:srcCompat="@drawable/ic_clock" />
 
                 </com.google.android.material.card.MaterialCardView>
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView4"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:paddingTop="@dimen/nav_header_vertical_spacing"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="3dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
 
-                <ImageView
-                    android:id="@+id/imageView"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/nav_header_desc"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/kantipur" />
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorDarkerGrey"
+                    app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        style="@style/TextAppearance.MdcTypographyStyles.Headline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/app_name"
+                        android:textAllCaps="true" />
 
+                </androidx.appcompat.widget.Toolbar>
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animation_view"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:layout_weight="0.3"
-                android:visibility="visible"
-                android:layout_marginTop="60dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-                app:lottie_autoPlay="true"
-                app:lottie_fileName="equalizer.json"
-                app:lottie_loop="true" />
+            </com.google.android.material.appbar.AppBarLayout>
 
-            <TextView
-                android:id="@+id/radioNameTextView"
-                style="@style/TextAppearance.MdcTypographyStyles.Headline5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:gravity="center"
-                android:ellipsize="end"
-                android:maxLines="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-                app:layout_constraintTop_toBottomOf="@+id/animation_view"
-                android:text="Radio Kantipur" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
-            <TextView
-                android:id="@+id/textView3"
-                style="@style/TextAppearance.MdcTypographyStyles.Body2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="2"
-                android:text="Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock  "
-                android:textColor="#BDBDBD"
-                app:layout_constraintEnd_toEndOf="@+id/radioNameTextView"
-                app:layout_constraintStart_toStartOf="@+id/radioNameTextView"
-                app:layout_constraintTop_toBottomOf="@+id/radioNameTextView" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/textView3"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-
-
-                <TextView
-                    android:id="@+id/genreTextView"
-                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="Classic Rock" />
-
-
-                <ImageView
-                    android:id="@+id/dot"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/ic_dot_white" />
-
-                <TextView
-                    android:id="@+id/countryTextView"
-                    style="@style/TextAppearance.MdcTypographyStyles.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="England" />
-
-            </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_play"
-                android:text="@string/play"
-                android:layout_marginTop="10dp"
-                app:backgroundTint="@color/colorBlueText"
-                app:cornerRadius="10dp"
-                android:paddingStart="30dp"
-                android:onClick="@{viewmodel::onPlayClicked}"
-                android:paddingEnd="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView7"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="15dp"
-                android:onClick="@{viewmodel::onSetTimerClicked}"
-                android:paddingTop="@dimen/nav_header_vertical_spacing"
-                app:cardBackgroundColor="#1E242D"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="3dp"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_exit"
-                app:layout_constraintStart_toEndOf="@+id/btn_exit"
-                app:layout_constraintTop_toTopOf="@+id/btn_exit">
-
-                <ImageView
-                    android:id="@+id/timerImageView"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/nav_header_desc"
-                    app:srcCompat="@drawable/ic_clock" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
+            android:id="@+id/adLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorDarkerGrey"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+    </RelativeLayout>
 
-                <TextView
-                    style="@style/TextAppearance.MdcTypographyStyles.Headline5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/app_name"
-                    android:textAllCaps="true" />
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <data>
 

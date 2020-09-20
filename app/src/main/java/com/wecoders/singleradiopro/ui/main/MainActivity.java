@@ -14,9 +14,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.databinding.ActivityMainBinding;
+import com.wecoders.singleradiopro.util.AdsUtil;
 import com.wecoders.singleradiopro.util.AppUtil;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         MainActivityViewModel model = new ViewModelProvider(this).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
+
+        MobileAds.initialize(this, initializationStatus -> {
+        });
+
+        AdsUtil.loadBannerAd(this, binding.appBarMainLayout.adLayout);
 
         setSupportActionBar(binding.appBarMainLayout.toolbar);
         getSupportActionBar().setTitle("");

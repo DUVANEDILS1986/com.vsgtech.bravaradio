@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">Single Radio Pro</string>
+
+
+    <!--Replace this with your base url-->
+    <string name="base_url">"https://radio.multikhabar.com/api/"</string>
+
+    <!--Replace this Admob app_ID with your App_ID generated from Admob-->
+    <string name="adMob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+
+    <!--Replace with your banner and interestial ads ID created from Admob-->
+    <string name="live_banner_ad_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interestial_live_ad_id">ca-app-pub-3940256099942544/1033173712</string>
+
+    <!--Admob test banner and interestial ads ID-->
+    <string name="test_banner_ad_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interestial_test_ad_id">ca-app-pub-3940256099942544/1033173712</string>
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -17,9 +34,6 @@
     <string name="notification">Notification</string>
     <string name="cancel">Cancel</string>
 
-
-    <!--Replace this with your base url-->
-    <string name="base_url">"https://radio.multikhabar.com/api/"</string>
 
     <!--    exit dialog text-->
     <string name="exit_dialog_title">Are you sure?</string>

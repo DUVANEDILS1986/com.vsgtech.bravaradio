@@ -15,4 +15,30 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="feedback">Feedback</string>
     <string name="notification">Notification</string>
+    <string name="cancel">Cancel</string>
+
+
+    <!--Replace this with your base url-->
+    <string name="base_url">"https://radio.multikhabar.com/api/"</string>
+
+    <!--    exit dialog text-->
+    <string name="exit_dialog_title">Are you sure?</string>
+    <string name="exit_dialog_message">Exiting the app will stop the radio. Press MINIMIZE to play in background.</string>
+    <string name="exit_dialog_message2">Press EXIT to quit application, press CANCEL to dismiss.</string>
+    <string name="exit_positive_button">exit</string>
+    <string name="exit_negative_button">minimize</string>
+    <string name="exit_negative_button2">cancel</string>
+
+    <!--    report dialog text-->
+    <string name="report_title">Report Radio</string>
+    <string name="report_msg">Your report will be sent for review. Press CANCEL to abort.</string>
+    <string name="report">report</string>
+    <string name="oops">Oops!!</string>
+    <string name="no_results_found">No results found.</string>
+
+    <!--    no connectivity dialog-->
+    <string name="nc_dialog_title">No Connectivity!</string>
+    <string name="nc_dialog_message">Please check your internet connection and try again.</string>
+    <string name="nc_dialog_button">try again</string>
+
 </resources>

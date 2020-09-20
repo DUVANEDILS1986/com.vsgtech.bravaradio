@@ -3,38 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
 
+    <group
+        android:id="@+id/group_notification"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_notification"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_bell"
             android:title="@string/notification" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
 
         <item
             android:id="@+id/nav_feedback"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_message_square"
             android:title="@string/feedback" />
 
         <item
             android:id="@+id/nav_pp"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_file_text"
             android:title="@string/privacy_policy" />
 
 
         <item
             android:id="@+id/nav_rate"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_star"
             android:title="@string/rate_us" />
         <item
             android:id="@+id/nav_share"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_share"
             android:title="@string/share" />
 
+    </group>
+
+    <group
+        android:id="@+id/group_about"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_code"
             android:title="@string/about_us" />
 
-
     </group>
+
+
 </menu>

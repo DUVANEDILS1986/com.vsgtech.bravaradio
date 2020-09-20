@@ -38,7 +38,7 @@
     <style name="TextAppearance.MdcTypographyStyles.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/pt_sans_narrow</item>
         <item name="android:fontFamily">@font/pt_sans_narrow</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:textColor">@color/colorPrimaryDarkShade</item>
     </style>
 

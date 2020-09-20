@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.wecoders.singleradiopro.MainActivityViewModel" />
+            type="com.wecoders.singleradiopro.ui.main.MainActivityViewModel" />
     </data>
 
 
@@ -16,6 +16,15 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
+
+
+        <include
+            android:id="@+id/app_bar_main_layout"
+            layout="@layout/app_bar_main"
+            app:viewmodel="@{viewmodel}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
@@ -29,13 +38,6 @@
             app:itemTextAppearance="@style/TextAppearance.MdcTypographyStyles.Body1"
             app:itemTextColor="@color/colorWhite"
             app:menu="@menu/activity_main_drawer" />
-
-        <include
-            android:id="@+id/app_bar_main_layout"
-            layout="@layout/app_bar_main"
-            app:viewmodel="@{viewmodel}"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

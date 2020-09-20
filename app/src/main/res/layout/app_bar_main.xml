@@ -61,6 +61,7 @@
                     android:layout_height="60dp"
                     android:layout_marginStart="10dp"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    android:onClick="@{viewmodel::onFacebookClicked}"
                     app:cardBackgroundColor="#1E242D"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="3dp"
@@ -82,6 +83,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    android:onClick="@{viewmodel::onInstagramClicked}"
                     app:cardBackgroundColor="#1E242D"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="3dp"
@@ -107,6 +109,7 @@
                     android:layout_height="60dp"
                     android:layout_marginEnd="10dp"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    android:onClick="@{viewmodel::onTwitterClicked}"
                     app:cardBackgroundColor="#1E242D"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="3dp"
@@ -182,6 +185,7 @@
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
                     app:cardBackgroundColor="#40000000"
                     app:cardCornerRadius="15dp"
+                    android:onClick="@{viewmodel::onReportStreamClicked}"
                     app:cardElevation="3dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -189,7 +193,7 @@
                     <ImageView
                         android:id="@+id/reportImageView"
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:contentDescription="@string/nav_header_desc"
                         app:srcCompat="@drawable/ic_flag" />
@@ -318,6 +322,7 @@
                 app:backgroundTint="@color/colorBlueText"
                 app:cornerRadius="10dp"
                 android:paddingStart="30dp"
+                android:onClick="@{viewmodel::onPlayClicked}"
                 android:paddingEnd="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -328,6 +333,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="15dp"
+                android:onClick="@{viewmodel::onSetTimerClicked}"
                 android:paddingTop="@dimen/nav_header_vertical_spacing"
                 app:cardBackgroundColor="#1E242D"
                 app:cardCornerRadius="15dp"
@@ -380,7 +386,7 @@
 
         <variable
             name="viewmodel"
-            type="com.wecoders.singleradiopro.MainActivityViewModel" />
+            type="com.wecoders.singleradiopro.ui.main.MainActivityViewModel" />
     </data>
 
 </layout>

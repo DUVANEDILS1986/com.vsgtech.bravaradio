@@ -1,9 +1,10 @@
-package com.wecoders.singleradiopro;
+package com.wecoders.singleradiopro.ui.main;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.navigation.NavigationView;
+import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 
 
-        com.wecoders.singleradiopro.databinding.ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         MainActivityViewModel model = new ViewModelProvider(this).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
 
@@ -41,12 +43,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //onNavigationItemSelected(binding.navView.getMenu().getItem(0)); //select home fragment by default
 
 
+        model.getReportResponseLiveData().observe(this, response -> {
+            try {
+                Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+            } catch (Exception ignored) {
+
+            }
+
+        });
+
     }
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.nav_notification) {
 
 

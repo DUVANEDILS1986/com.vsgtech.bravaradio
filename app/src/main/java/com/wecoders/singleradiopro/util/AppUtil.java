@@ -2,9 +2,12 @@ package com.wecoders.singleradiopro.util;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -68,6 +71,30 @@ public class AppUtil {
         });
 
         alertDialog.show();
+    }
+
+    public static void loadWebView(Context context, String path) {
+
+        androidx.appcompat.app.AlertDialog.Builder alert = new androidx.appcompat.app.AlertDialog.Builder(context);
+        WebView wv = new WebView(context);
+        wv.loadUrl(path);
+        wv.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+        alert.setView(wv);
+        alert.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
     }
 
 

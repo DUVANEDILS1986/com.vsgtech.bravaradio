@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.navigation.NavigationView;
 import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.databinding.ActivityMainBinding;
+import com.wecoders.singleradiopro.util.AppUtil;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         } else if (id == R.id.nav_pp) {
+
+            AppUtil.loadWebView(this, "https://codecanyon.net/user/we3coders/portfolio");
 
 
         } else if (id == R.id.nav_rate) {

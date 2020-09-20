@@ -1,4 +1,26 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.8'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
+
+
+
+
 apply plugin: 'com.android.application'
+
+apply plugin: 'com.google.gms.google-services'
+
+// Apply the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29
@@ -11,6 +33,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+        manifestPlaceholders = [
+                onesignal_app_id: '95b236b1-1e81-4e5b-ae46-b887a3069b61',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
 
     buildTypes {
@@ -60,5 +89,20 @@ dependencies {
 
     //google ads SDK
     implementation 'com.google.android.gms:play-services-ads:19.4.0'
+
+    //Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
+    //Firebase Crashlytics SDK.
+    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+
+    //Onesignal SDK
+    implementation 'com.onesignal:OneSignal:3.13.0'
+
+    //event bus: publish/subscribe event bus for Android and Java.
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+    // full exoplayer library
+    implementation 'com.google.android.exoplayer:exoplayer:2.11.1'
 
 }

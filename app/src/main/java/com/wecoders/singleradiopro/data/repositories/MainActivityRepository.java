@@ -10,6 +10,7 @@ import com.wecoders.singleradiopro.data.network.MyApi;
 import com.wecoders.singleradiopro.data.network.SafeApiRequest;
 import com.wecoders.singleradiopro.data.network.SetupRetrofit;
 import com.wecoders.singleradiopro.data.network.responses.Feedback;
+import com.wecoders.singleradiopro.data.network.responses.Radio;
 
 public class MainActivityRepository extends SafeApiRequest {
 
@@ -30,4 +31,10 @@ public class MainActivityRepository extends SafeApiRequest {
         return callRetrofitObjectResponse(context, api.reportRadio("streaming/issue/report/store"));
     }
 
+    /**
+     * get radio information
+     */
+    public MutableLiveData<Radio> getRadio() {
+        return callRetrofitObjectResponse(context, api.getRadio("radio"));
+    }
 }

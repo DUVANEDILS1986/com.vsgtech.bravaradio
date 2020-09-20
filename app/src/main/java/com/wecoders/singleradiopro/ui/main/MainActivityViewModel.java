@@ -6,41 +6,77 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.Bindable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.wecoders.singleradiopro.data.network.responses.Feedback;
+import com.wecoders.singleradiopro.data.network.responses.Radio;
 import com.wecoders.singleradiopro.data.repositories.MainActivityRepository;
+import com.wecoders.singleradiopro.ui.player.TimerDialog;
+import com.wecoders.singleradiopro.ui.radio.RadioManager;
 import com.wecoders.singleradiopro.util.AppUtil;
 
-public class MainActivityViewModel  extends AndroidViewModel {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
-    private MutableLiveData<Feedback> reportResponseLiveData=new MutableLiveData<>();
+public class MainActivityViewModel extends AndroidViewModel {
+
+    private RadioManager radioManager;
+
+    private MutableLiveData<Feedback> reportResponseLiveData = new MutableLiveData<>();
+    public MutableLiveData<Radio> radioObjectLiveData;
     private MainActivityRepository repository;
+    private MutableLiveData<String> timerText = new MutableLiveData<>();
+    public Radio radio;
+    private boolean isTimerSet = false;
+    Handler handler = new Handler();
+    Runnable r = () -> {
+        isTimerSet = false;
+        timerText.setValue("none");
+        stopPlayer();
+    };
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
-        this.repository =  new MainActivityRepository(application);
+        radioManager = RadioManager.with(application.getApplicationContext());
+        this.repository = new MainActivityRepository(application);
+        radioObjectLiveData = repository.getRadio();
     }
 
-    public String setGreetingText(){
+    public String setGreetingText() {
 
-        return "";
+        Calendar cal = Calendar.getInstance();
+        int calendarHour = cal.get(Calendar.HOUR_OF_DAY);
+
+        if(calendarHour >= 12 && calendarHour<=16){
+           return "Good Afternoon,";
+        }else if(calendarHour >= 17 && calendarHour<=20){
+            return "Good Evening,";
+        }else if(calendarHour >= 21 && calendarHour<=23){
+            return "Good Night,";
+        }else{
+            return "Good Morning,";
+        }
+
     }
 
-    public String setDateText(){
-
-        return "";
+    public String setDateText() {
+        return  new SimpleDateFormat("MMMM d, yyyy", Locale.getDefault()).format(new Date());
     }
 
 
-    public void onFacebookClicked(View view){
+    public void onFacebookClicked(View view) {
         Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
         String facebookUrl = getFacebookPageURL(view.getContext());
         facebookIntent.setData(Uri.parse(facebookUrl));
@@ -66,7 +102,7 @@ public class MainActivityViewModel  extends AndroidViewModel {
         }
     }
 
-    public void onInstagramClicked(View view){
+    public void onInstagramClicked(View view) {
         String instagramUser = "because.nepal";
         Uri uri = Uri.parse("http://instagram.com/_u/" + instagramUser);
         Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
@@ -81,21 +117,21 @@ public class MainActivityViewModel  extends AndroidViewModel {
         }
     }
 
-    public void onTwitterClicked(View view){
+    public void onTwitterClicked(View view) {
 
         String twitter_user_name = "AndroTesteur";
         try {
             view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + twitter_user_name)));
-        }catch (Exception e) {
+        } catch (Exception e) {
             view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/#!/" + twitter_user_name)));
         }
     }
 
-    public void onReportStreamClicked(View view){
+    public void onReportStreamClicked(View view) {
         AppUtil.showReportDialog(view.getContext(), new AppUtil.AlertDialogListener() {
             @Override
             public void onPositive() {
-                MutableLiveData<Feedback> flag= repository.reportRadio();
+                MutableLiveData<Feedback> flag = repository.reportRadio();
                 flag.observe((LifecycleOwner) view.getContext(), feedback -> reportResponseLiveData.setValue(feedback));
             }
 
@@ -106,11 +142,32 @@ public class MainActivityViewModel  extends AndroidViewModel {
         });
     }
 
-    public void onSetTimerClicked(View view){
+    public void onSetTimerClicked(View view) {
+        TimerDialog timerDialog = new TimerDialog(view.getContext(), (time, timeText) -> {
+            timerText.setValue(timeText);
+            if (time == 0) {
+                if (isTimerSet) {
+                    isTimerSet = false;
+                    handler.removeCallbacksAndMessages(null);
 
+                }
+            } else {
+                if (isTimerSet) {
+                    handler.removeCallbacksAndMessages(null);
+                }
+                isTimerSet = true;
+                handler.postDelayed(r, time);
+            }
+
+        });
+        timerDialog.show();
     }
 
-    public void onPlayClicked(View view){
+    public void onPlayClicked(View view) {
+
+        if (radio != null && radioManager!= null) {
+            radioManager.playOrPause(radio);
+        }
 
     }
 
@@ -118,5 +175,29 @@ public class MainActivityViewModel  extends AndroidViewModel {
         return reportResponseLiveData;
     }
 
+    public LiveData<Radio> getRadioLiveData() {
+        return radioObjectLiveData;
+    }
+
+    public MutableLiveData<String> getTimerText() {
+        return timerText;
+    }
+
+
+    public boolean isPlaying() {
+        return radioManager.isPlaying();
+    }
+
+    public void bind() {
+        radioManager.bind();
+    }
+
+    public void unbind() {
+        radioManager.unbind();
+    }
+
+    public void stopPlayer() {
+        radioManager.stopPlayer();
+    }
 
 }

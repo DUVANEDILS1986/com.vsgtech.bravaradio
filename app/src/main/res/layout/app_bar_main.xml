@@ -30,7 +30,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:text="Good Morning,"
+                    tools:text="Good Morning,"
+                    android:text="@{viewmodel.setGreetingText}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +43,8 @@
                     android:layout_gravity="center"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="September 20, 2020"
+                    android:text="@{viewmodel.setDateText}"
+                    tools:text="September 20, 2020"
                     app:layout_constraintBottom_toBottomOf="@+id/materialCardView4"
                     app:layout_constraintEnd_toStartOf="@+id/materialCardView4"
                     app:layout_constraintStart_toStartOf="parent"
@@ -169,7 +171,8 @@
                                 android:layout_gravity="center"
                                 android:contentDescription="@string/nav_header_desc"
                                 android:scaleType="centerCrop"
-                                app:srcCompat="@drawable/kantipur" />
+                                android:src = "@{radio.image}"
+                                />
 
                             <ImageView
                                 android:layout_width="match_parent"
@@ -213,10 +216,8 @@
                     android:id="@+id/materialCardView4"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="15dp"
-                    app:cardElevation="3dp"
+                    app:cardBackgroundColor="@color/colorLighterGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -224,9 +225,11 @@
                         android:id="@+id/imageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@color/colorLighterGrey"
                         android:contentDescription="@string/nav_header_desc"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/kantipur" />
+                        android:src = "@{radio.image}"
+                       />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -241,7 +244,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-                    app:lottie_autoPlay="true"
+                    app:lottie_autoPlay="false"
                     app:lottie_fileName="equalizer.json"
                     app:lottie_loop="true" />
 
@@ -258,7 +261,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout"
                     app:layout_constraintTop_toBottomOf="@+id/animation_view"
-                    android:text="Radio Kantipur" />
+                    android:text="@{radio.name}" />
 
 
                 <TextView
@@ -269,7 +272,7 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="2"
-                    android:text="Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock Classic Rock  "
+                    android:text="@{radio.description}"
                     android:textColor="#BDBDBD"
                     app:layout_constraintEnd_toEndOf="@+id/radioNameTextView"
                     app:layout_constraintStart_toStartOf="@+id/radioNameTextView"
@@ -296,7 +299,8 @@
                         android:layout_marginEnd="10dp"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="Classic Rock" />
+                        android:text="@{radio.genres}"
+                        tools:text="Classic Rock" />
 
 
                     <ImageView
@@ -314,12 +318,13 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="England" />
+                        android:text="@{radio.country}"
+                        tools:text="England" />
 
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_exit"
+                    android:id="@+id/btnPlayStop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableEnd="@drawable/ic_play"
@@ -344,9 +349,9 @@
                     app:cardBackgroundColor="#1E242D"
                     app:cardCornerRadius="15dp"
                     app:cardElevation="3dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_exit"
-                    app:layout_constraintStart_toEndOf="@+id/btn_exit"
-                    app:layout_constraintTop_toTopOf="@+id/btn_exit">
+                    app:layout_constraintBottom_toBottomOf="@+id/btnPlayStop"
+                    app:layout_constraintStart_toEndOf="@+id/btnPlayStop"
+                    app:layout_constraintTop_toTopOf="@+id/btnPlayStop">
 
                     <ImageView
                         android:id="@+id/timerImageView"
@@ -401,6 +406,11 @@
         <variable
             name="viewmodel"
             type="com.wecoders.singleradiopro.ui.main.MainActivityViewModel" />
+
+        <variable
+            name="radio"
+            type="com.wecoders.singleradiopro.data.network.responses.Radio" />
+
     </data>
 
 </layout>

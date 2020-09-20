@@ -3,6 +3,7 @@ package com.wecoders.singleradiopro.data.network;
 
 import com.wecoders.singleradiopro.data.network.responses.Feedback;
 import com.wecoders.singleradiopro.data.network.responses.FeedbackBody;
+import com.wecoders.singleradiopro.data.network.responses.Radio;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,5 +21,9 @@ public interface MyApi {
     //reporting radio
     @GET("{path}")
     Call<Feedback> reportRadio(@Path(value = "path", encoded = true) String path);
+
+    //radio information
+    @GET("{path}")
+    Call<Radio> getRadio(@Path(value = "path", encoded = true) String path);
 
 }

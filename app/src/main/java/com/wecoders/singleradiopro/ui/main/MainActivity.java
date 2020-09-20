@@ -15,22 +15,31 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.databinding.ActivityMainBinding;
+import com.wecoders.singleradiopro.ui.radio.PlaybackStatus;
 import com.wecoders.singleradiopro.util.AdsUtil;
 import com.wecoders.singleradiopro.util.AppUtil;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    MainActivityViewModel model;
+    ActivityMainBinding binding;
+    boolean exitFlag = false;
+    boolean minimizeFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        MainActivityViewModel model = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        model = new ViewModelProvider(this).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
 
         MobileAds.initialize(this, initializationStatus -> {
@@ -48,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         binding.navView.setNavigationItemSelectedListener(this);
-        //onNavigationItemSelected(binding.navView.getMenu().getItem(0)); //select home fragment by default
 
 
         model.getReportResponseLiveData().observe(this, response -> {
@@ -59,6 +67,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         });
+
+        model.getRadioLiveData().observe(this, response -> {
+            try {
+                model.radio = response;
+                binding.appBarMainLayout.setRadio(response);
+            } catch (Exception ignored) {
+
+            }
+
+        });
+
 
     }
 
@@ -112,4 +131,101 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        model.unbind();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        model.bind();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        if (exitFlag) {
+            exitFlag = false;
+            finish();
+        } else if (minimizeFlag) {
+            minimizeFlag = false;
+            moveTaskToBack(true);
+        } else {
+
+            AppUtil.showExitDialog(MainActivity.this, model.isPlaying(), new AppUtil.AlertDialogListener() {
+                @Override
+                public void onPositive() {
+                    exitFlag = true;
+                    onBackPressed();
+                }
+
+                @Override
+                public void onCancel() {
+                    minimizeFlag = true;
+                    onBackPressed();
+                }
+            });
+        }
+
+    }
+
+    @Subscribe
+    public void onEvent(String status) {
+
+        switch (status) {
+            case PlaybackStatus.PLAYING:
+
+                break;
+
+            case PlaybackStatus.LOADING:
+
+                // loading
+
+                break;
+
+
+            case PlaybackStatus.ERROR:
+
+                Toast.makeText(this, "Error loading radio.", Toast.LENGTH_SHORT).show();
+                break;
+
+            case PlaybackStatus.PAUSED:
+                break;
+
+        }
+
+        if (status.equals(PlaybackStatus.PLAYING)) {
+            binding.appBarMainLayout.btnPlayStop.setText(R.string.stop);
+            binding.appBarMainLayout.btnPlayStop.setIconResource(R.drawable.ic_stop);
+            binding.appBarMainLayout.animationView.playAnimation();
+
+        } else {
+            binding.appBarMainLayout.btnPlayStop.setText(R.string.play);
+            binding.appBarMainLayout.btnPlayStop.setIconResource(R.drawable.ic_play);
+            binding.appBarMainLayout.animationView.pauseAnimation();
+        }
+
+        binding.appBarMainLayout.btnPlayStop.setIconGravity(MaterialButton.ICON_GRAVITY_END);
+
+
+    }
+
+
 }

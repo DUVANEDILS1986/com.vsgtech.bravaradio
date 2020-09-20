@@ -3,7 +3,7 @@
 
 
     <!--Replace this with your base url-->
-    <string name="base_url">"https://radio.multikhabar.com/api/"</string>
+    <string name="base_url">"https://radio-single.multikhabar.com/api/"</string>
 
     <!--Replace this Admob app_ID with your App_ID generated from Admob-->
     <string name="adMob_app_id">ca-app-pub-3940256099942544~3347511713</string>
@@ -26,6 +26,7 @@
 
     <string name="menu_home">Home</string>
     <string name="play">PLAY</string>
+    <string name="stop">STOP</string>
     <string name="about_us">About Us</string>
     <string name="share">Share</string>
     <string name="rate_us">Rate Us</string>

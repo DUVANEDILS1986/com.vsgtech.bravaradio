@@ -32,8 +32,8 @@ import java.util.Locale;
 
 public class MainActivityViewModel extends AndroidViewModel {
 
-    private RadioManager radioManager;
 
+    private RadioManager radioManager;
     private MutableLiveData<Feedback> reportResponseLiveData = new MutableLiveData<>();
     public MutableLiveData<Radio> radioObjectLiveData;
     private MainActivityRepository repository;

@@ -3,12 +3,15 @@ package com.wecoders.singleradiopro.ui.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,8 +20,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
+import com.onesignal.OneSignal;
 import com.wecoders.singleradiopro.R;
+import com.wecoders.singleradiopro.data.preferences.PrefManager;
 import com.wecoders.singleradiopro.databinding.ActivityMainBinding;
+import com.wecoders.singleradiopro.ui.about.AboutActivity;
 import com.wecoders.singleradiopro.ui.radio.PlaybackStatus;
 import com.wecoders.singleradiopro.util.AdsUtil;
 import com.wecoders.singleradiopro.util.AppUtil;
@@ -26,12 +32,15 @@ import com.wecoders.singleradiopro.util.AppUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    SwitchCompat drawerSwitch;
     MainActivityViewModel model;
     ActivityMainBinding binding;
     boolean exitFlag = false;
     boolean minimizeFlag = false;
+    public String SWITCH_KEY = "SWITCH_KEY";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +87,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         });
 
+        drawerSwitch = (SwitchCompat) binding.navView.getMenu().findItem(R.id.nav_notification).getActionView();
+        drawerSwitch.setChecked(new PrefManager<Boolean>(this).get(SWITCH_KEY, true));
+
+        drawerSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if(isChecked){
+                new PrefManager<Boolean>(this).set(SWITCH_KEY, true);
+                OneSignal.setSubscription(true);
+            }else{
+                new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
+                OneSignal.setSubscription(false);
+            }
+
+        });
+
+
+    }
+
+
+    private void setNotificationStatus(){
+        if (new PrefManager<Boolean>(this).get(SWITCH_KEY, true)) {
+            Log.e("Notification" , "OFF" );
+            new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
+        } else {
+            Log.e("Notification" , "ON" );
+            new PrefManager<Boolean>(this).set(SWITCH_KEY, true);
+        }
+
+        drawerSwitch.setChecked(new PrefManager<Boolean>(this).get(SWITCH_KEY, false));
 
     }
 
@@ -87,8 +125,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_notification) {
-
-
+            setNotificationStatus();
+            return  false;
         } else if (id == R.id.nav_feedback) {
 
 
@@ -123,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_about) {
 
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
 
         }
 

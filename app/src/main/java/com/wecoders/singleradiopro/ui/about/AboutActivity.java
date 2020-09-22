@@ -3,20 +3,28 @@ package com.wecoders.singleradiopro.ui.about;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.databinding.ActivityAboutBinding;
+import com.wecoders.singleradiopro.util.AdsUtil;
 
 public class AboutActivity extends AppCompatActivity {
+
+    InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityAboutBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_about);
+
+        mInterstitialAd=new InterstitialAd(this);
+        AdsUtil.loadInterstitialAd(this,mInterstitialAd);
 
         setSupportActionBar(binding.toolbarAbout);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -51,6 +59,7 @@ public class AboutActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        AdsUtil.showInterstitialAd(mInterstitialAd);
         super.onBackPressed();
         this.finish();
     }

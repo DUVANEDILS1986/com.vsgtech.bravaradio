@@ -361,7 +361,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
         }
 
-        exoPlayer.prepare(buildMediaSource("http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio5live_mf_p"));
+        exoPlayer.prepare(buildMediaSource(streamUrl));
         exoPlayer.setPlayWhenReady(true);
     }
 

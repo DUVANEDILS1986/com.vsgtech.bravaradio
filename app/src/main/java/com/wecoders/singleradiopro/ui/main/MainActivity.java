@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     boolean exitFlag = false;
     boolean minimizeFlag = false;
     public String SWITCH_KEY = "SWITCH_KEY";
+    private String privacyPolicyUrl;
 
 
     @Override
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         model.getRadioLiveData().observe(this, response -> {
             try {
+                privacyPolicyUrl = response.getPrivacyPolicy();
                 model.radio = response;
                 binding.appBarMainLayout.setRadio(response);
             } catch (Exception ignored) {
@@ -92,10 +93,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawerSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
-            if(isChecked){
+            if (isChecked) {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, true);
                 OneSignal.setSubscription(true);
-            }else{
+            } else {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
                 OneSignal.setSubscription(false);
             }
@@ -106,12 +107,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    private void setNotificationStatus(){
+    private void setNotificationStatus() {
         if (new PrefManager<Boolean>(this).get(SWITCH_KEY, true)) {
-            Log.e("Notification" , "OFF" );
+            Log.e("Notification", "OFF");
             new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
         } else {
-            Log.e("Notification" , "ON" );
+            Log.e("Notification", "ON");
             new PrefManager<Boolean>(this).set(SWITCH_KEY, true);
         }
 
@@ -126,13 +127,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_notification) {
             setNotificationStatus();
-            return  false;
+            return false;
         } else if (id == R.id.nav_feedback) {
 
 
         } else if (id == R.id.nav_pp) {
 
-            AppUtil.loadWebView(this, "https://codecanyon.net/user/we3coders/portfolio");
+            if (privacyPolicyUrl != null)
+                AppUtil.loadWebView(this, privacyPolicyUrl);
 
 
         } else if (id == R.id.nav_rate) {

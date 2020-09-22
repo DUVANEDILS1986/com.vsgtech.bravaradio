@@ -46,7 +46,7 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_code"
+            android:icon="@drawable/ic_user"
             android:title="@string/about_us" />
 
     </group>

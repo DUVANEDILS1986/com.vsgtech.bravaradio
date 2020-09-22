@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.wecoders.singleradiopro.ui.feedback.FeedbackViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -25,6 +30,9 @@
             android:layout_marginEnd="16dp"
             android:hint="@string/email"
             style="@style/MyOutlineBox"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorText"
+            app:error="@{viewModel.feedback.emailError}"
             android:textColorHint="@color/colorGrey"
             app:hintTextColor="@drawable/selector_input"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +44,8 @@
                 style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@={viewModel.feedback.email}"
+                app:onFocus="@{viewModel.onFocusEmail}"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -51,6 +61,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/subject"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorText"
+            app:error="@{viewModel.feedback.subjectError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailTextField">
@@ -59,7 +72,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.feedback.subject}"
+                app:onFocus="@{viewModel.onFocusSubject}"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,6 +90,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:hint="@string/message"
+            app:errorEnabled="true"
+            app:errorTextColor="@color/errorText"
+            app:error="@{viewModel.feedback.messageError}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/subjectTextField">
@@ -83,7 +102,10 @@
                 style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:gravity="top" />
+                android:gravity="top"
+                android:text="@={viewModel.feedback.message}"
+                app:onFocus="@{viewModel.onFocusMessage}"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,6 +118,8 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:text="@string/submit"
+            android:enabled="@{viewModel.feedback.valid}"
+            android:onClick="@{viewModel::onSubmit}"
             app:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

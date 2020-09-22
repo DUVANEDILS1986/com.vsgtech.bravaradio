@@ -3,7 +3,7 @@
 
 
     <!--Replace this with your base url-->
-    <string name="base_url">"https://radio.multikhabar.com/api/"</string>
+    <string name="base_url">"https://radio-single.multikhabar.com/api/"</string>
 
     <!--Replace this Admob app_ID with your App_ID generated from Admob-->
     <string name="adMob_app_id">ca-app-pub-3940256099942544~3347511713</string>
@@ -26,6 +26,7 @@
 
     <string name="menu_home">Home</string>
     <string name="play">PLAY</string>
+    <string name="stop">STOP</string>
     <string name="about_us">About Us</string>
     <string name="share">Share</string>
     <string name="rate_us">Rate Us</string>
@@ -59,4 +60,16 @@
     <string name="subject">Subject</string>
     <string name="message">Message</string>
 
+    <!-- About US Text-->
+    <string name="about">About</string>
+    <string name="profile">Profile</string>
+    <string name="version">Version</string>
+    <string name="description">Description</string>
+    <string name="yourcompany_gmail_com">yourcompany@gmail.com</string>
+    <string name="about_description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.</string>
+
+    <!--    response form-->
+    <string name="error_format_invalid">Format is invalid</string>
+    <string name="error_too_short">Too short</string>
+    <string name="error_field_empty">Field is empty</string>
 </resources>

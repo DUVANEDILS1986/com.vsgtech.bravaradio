@@ -27,6 +27,7 @@
 
 
         <com.google.android.material.navigation.NavigationView
+            android:theme="@style/NavigationTheme"
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -37,6 +38,9 @@
             app:itemIconTint="@color/colorWhite"
             app:itemTextAppearance="@style/TextAppearance.MdcTypographyStyles.Body1"
             app:itemTextColor="@color/colorWhite"
+            app:itemIconSize="18dp"
+            app:itemIconPadding="24dp"
+            app:itemHorizontalPadding="16dp"
             app:menu="@menu/activity_main_drawer" />
 
     </androidx.drawerlayout.widget.DrawerLayout>

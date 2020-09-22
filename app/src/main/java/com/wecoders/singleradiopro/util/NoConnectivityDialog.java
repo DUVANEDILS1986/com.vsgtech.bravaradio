@@ -2,6 +2,8 @@ package com.wecoders.singleradiopro.util;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,13 +34,14 @@ public class NoConnectivityDialog extends DialogFragment implements View.OnClick
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialog_no_connectivity, null, false);
         binding.btnRetry.setOnClickListener(this);
-        AlertDialog alertDialog = new AlertDialog.Builder(getContext(), android.R.style.Theme_Light_NoTitleBar_Fullscreen)
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(binding.getRoot())
                 .setCancelable(false)
                 .create();
         alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
-        alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        setCancelable(false);
+        alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         return alertDialog;
     }
 
@@ -50,4 +53,6 @@ public class NoConnectivityDialog extends DialogFragment implements View.OnClick
             getActivity().finish();
         }
     }
+
+
 }

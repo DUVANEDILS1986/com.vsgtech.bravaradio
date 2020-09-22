@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorLighterGrey">
+        android:background="@color/colorPrimary">
 
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -171,7 +171,7 @@
                                 android:layout_gravity="center"
                                 android:contentDescription="@string/nav_header_desc"
                                 android:scaleType="centerCrop"
-                                android:src = "@{radio.image}"
+                                app:blurSrc= "@{radio.image}"
                                 />
 
                             <ImageView
@@ -217,7 +217,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     app:cardCornerRadius="15dp"
-                    app:cardBackgroundColor="@color/colorLighterGrey"
+                    app:cardBackgroundColor="@color/colorPrimaryLight"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -225,7 +225,7 @@
                         android:id="@+id/imageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorLighterGrey"
+                        android:background="@color/colorPrimaryLight"
                         android:contentDescription="@string/nav_header_desc"
                         android:scaleType="centerCrop"
                         android:src = "@{radio.image}"
@@ -257,6 +257,7 @@
                     android:layout_marginStart="10dp"
                     android:gravity="center"
                     android:ellipsize="end"
+                    android:textAlignment="center"
                     android:maxLines="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/constraintLayout"
@@ -330,7 +331,7 @@
                     android:drawableEnd="@drawable/ic_play"
                     android:text="@string/play"
                     android:layout_marginTop="10dp"
-                    app:backgroundTint="@color/colorBlueText"
+                    app:backgroundTint="@color/colorAccent"
                     app:cornerRadius="10dp"
                     android:paddingStart="30dp"
                     android:onClick="@{viewmodel::onPlayClicked}"
@@ -374,7 +375,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorDarkerGrey"
+                    android:background="@color/colorPrimaryDark"
                     app:popupTheme="@style/AppTheme.PopupOverlay">
 
                     <TextView

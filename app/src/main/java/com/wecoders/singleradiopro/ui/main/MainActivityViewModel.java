@@ -7,18 +7,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.Bindable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.wecoders.singleradiopro.data.network.responses.Feedback;
+import com.wecoders.singleradiopro.data.network.responses.Response;
 import com.wecoders.singleradiopro.data.network.responses.Radio;
 import com.wecoders.singleradiopro.data.repositories.MainActivityRepository;
 import com.wecoders.singleradiopro.ui.player.TimerDialog;
@@ -34,7 +31,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
 
     private RadioManager radioManager;
-    private MutableLiveData<Feedback> reportResponseLiveData = new MutableLiveData<>();
+    private MutableLiveData<Response> reportResponseLiveData = new MutableLiveData<>();
     public MutableLiveData<Radio> radioObjectLiveData;
     private MainActivityRepository repository;
     private MutableLiveData<String> timerText = new MutableLiveData<>();
@@ -131,8 +128,8 @@ public class MainActivityViewModel extends AndroidViewModel {
         AppUtil.showReportDialog(view.getContext(), new AppUtil.AlertDialogListener() {
             @Override
             public void onPositive() {
-                MutableLiveData<Feedback> flag = repository.reportRadio();
-                flag.observe((LifecycleOwner) view.getContext(), feedback -> reportResponseLiveData.setValue(feedback));
+                MutableLiveData<Response> flag = repository.reportRadio();
+                flag.observe((LifecycleOwner) view.getContext(), response -> reportResponseLiveData.setValue(response));
             }
 
             @Override
@@ -171,7 +168,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<Feedback> getReportResponseLiveData() {
+    public LiveData<Response> getReportResponseLiveData() {
         return reportResponseLiveData;
     }
 

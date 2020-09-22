@@ -55,6 +55,10 @@
     <string name="nc_dialog_title">No Connectivity!</string>
     <string name="nc_dialog_message">Please check your internet connection and try again.</string>
     <string name="nc_dialog_button">try again</string>
+    <string name="submit">Submit</string>
+    <string name="email">Email</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
 
     <!-- About US Text-->
     <string name="about">About</string>
@@ -64,5 +68,8 @@
     <string name="yourcompany_gmail_com">yourcompany@gmail.com</string>
     <string name="about_description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.</string>
 
-
+    <!--    response form-->
+    <string name="error_format_invalid">Format is invalid</string>
+    <string name="error_too_short">Too short</string>
+    <string name="error_field_empty">Field is empty</string>
 </resources>

@@ -105,4 +105,7 @@ dependencies {
     // full exoplayer library
     implementation 'com.google.android.exoplayer:exoplayer:2.11.1'
 
+    //blur
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'
+
 }

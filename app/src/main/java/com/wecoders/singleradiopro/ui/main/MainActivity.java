@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,9 @@ import com.onesignal.OneSignal;
 import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.data.preferences.PrefManager;
 import com.wecoders.singleradiopro.databinding.ActivityMainBinding;
+import com.wecoders.singleradiopro.databinding.NavHeaderMainBinding;
 import com.wecoders.singleradiopro.ui.about.AboutActivity;
+import com.wecoders.singleradiopro.ui.feedback.FeedbackActivity;
 import com.wecoders.singleradiopro.ui.radio.PlaybackStatus;
 import com.wecoders.singleradiopro.util.AdsUtil;
 import com.wecoders.singleradiopro.util.AppUtil;
@@ -60,12 +63,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportActionBar().setTitle("");
 
 
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, binding.drawerLayout, binding.appBarMainLayout.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         binding.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         binding.navView.setNavigationItemSelectedListener(this);
+
+        View view = binding.navView.getHeaderView(0);
+        NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.bind(view);
 
 
         model.getReportResponseLiveData().observe(this, response -> {
@@ -82,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 privacyPolicyUrl = response.getPrivacyPolicy();
                 model.radio = response;
                 binding.appBarMainLayout.setRadio(response);
+                navHeaderMainBinding.setRadio(response);
+
             } catch (Exception ignored) {
 
             }
@@ -129,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setNotificationStatus();
             return false;
         } else if (id == R.id.nav_feedback) {
-
+            startActivity(new Intent(MainActivity.this, FeedbackActivity.class));
 
         } else if (id == R.id.nav_pp) {
 

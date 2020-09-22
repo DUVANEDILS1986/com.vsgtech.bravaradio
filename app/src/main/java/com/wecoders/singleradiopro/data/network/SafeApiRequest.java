@@ -19,24 +19,6 @@ public class SafeApiRequest {
 
     public static final String NO_CONNECTIVITY_DIALOG = "no_connectivity_dialog";
 
-    public static <T> MutableLiveData<List<T>> callRetrofit(Context context, Call<List<T>> call) {
-        MutableLiveData<List<T>> responseList = new MutableLiveData<>();
-        Log.e("inside", call.request().url() + "------");
-
-        call.enqueue(new Callback<List<T>>() {
-            @Override
-            public void onResponse(Call<List<T>> call, Response<List<T>> response) {
-                responseList.setValue(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<List<T>> call, Throwable t) {
-                showDialog(context, t);
-            }
-        });
-        return responseList;
-    }
-
 
     public static <T> MutableLiveData<T> callRetrofitObjectResponse(Context context, Call<T> call) {
         MutableLiveData<T> responseObject = new MutableLiveData<>();

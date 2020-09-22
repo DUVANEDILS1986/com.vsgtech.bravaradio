@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/exit_positive_button"
-                    app:backgroundTint="@color/colorBlueText" />
+                    app:backgroundTint="@color/colorAccent" />
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

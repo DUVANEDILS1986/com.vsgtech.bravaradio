@@ -61,6 +61,6 @@ public class AboutActivity extends AppCompatActivity {
     public void onBackPressed() {
         AdsUtil.showInterstitialAd(mInterstitialAd);
         super.onBackPressed();
-        this.finish();
+        //this.finish();
     }
 }

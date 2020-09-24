@@ -90,12 +90,7 @@ public class AppUtil {
         });
 
         alert.setView(wv);
-        alert.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
+        alert.setNegativeButton("Dismiss", (dialog, id) -> dialog.dismiss());
 
         alert.show();
     }

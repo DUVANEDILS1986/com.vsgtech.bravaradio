@@ -22,7 +22,6 @@ import com.wecoders.singleradiopro.ui.SplashScreenActivity;
 
 public class NoConnectivityDialog extends DialogFragment implements View.OnClickListener {
 
-    private static final String TAG = "NoConnectivityDialog";
     private DialogNoConnectivityBinding binding;
 
     public static NoConnectivityDialog newInstance() {

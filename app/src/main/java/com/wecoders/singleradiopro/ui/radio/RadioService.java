@@ -46,7 +46,6 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     private final IBinder iBinder = new LocalBinder();
 
-    private final DefaultBandwidthMeter BANDWIDTH_METER = new DefaultBandwidthMeter();
     private SimpleExoPlayer exoPlayer;
     private MediaSessionCompat mediaSession;
     private MediaControllerCompat.TransportControls transportControls;
@@ -305,7 +304,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
     }
 
     @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
+    public void onTimelineChanged(Timeline timeline, int reason) {
 
     }
 

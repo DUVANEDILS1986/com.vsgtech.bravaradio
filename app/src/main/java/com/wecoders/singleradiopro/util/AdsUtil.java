@@ -10,6 +10,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
 import com.wecoders.singleradiopro.BuildConfig;
 import com.wecoders.singleradiopro.R;
 
@@ -40,7 +41,7 @@ public class AdsUtil {
                 }
 
                 @Override
-                public void onAdFailedToLoad(int errorCode) {
+                public void onAdFailedToLoad(LoadAdError errorCode) {
                     super.onAdFailedToLoad(errorCode);
                 }
 
@@ -90,7 +91,7 @@ public class AdsUtil {
             }
 
             @Override
-            public void onAdFailedToLoad(int errorCode) {
+            public void onAdFailedToLoad(LoadAdError errorCode) {
                 super.onAdFailedToLoad(errorCode);
                 ADS_LOAD_COUNT = 0;
                 mInterstitialAd.loadAd(adRequest);

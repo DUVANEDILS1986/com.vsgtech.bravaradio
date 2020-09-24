@@ -15,6 +15,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.data.network.responses.Response;
 import com.wecoders.singleradiopro.data.network.responses.Radio;
 import com.wecoders.singleradiopro.data.repositories.MainActivityRepository;
@@ -82,8 +83,8 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     //method to get the right URL to use in the intent
     public static String getFacebookPageURL(Context context) {
-        String FB_PAGE_USERNAME = "w3cod3rs";
-        String FACEBOOK_PAGE_ID = "106864031155552";
+        String FB_PAGE_USERNAME = context.getResources().getString(R.string.fb_page_username);
+        String FACEBOOK_PAGE_ID = context.getResources().getString(R.string.fb_page_id);;
         String FACEBOOK_URL = "https://m.facebook.com/" + FB_PAGE_USERNAME;
 
         PackageManager packageManager = context.getPackageManager();
@@ -100,7 +101,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
     public void onInstagramClicked(View view) {
-        String instagramUser = "because.nepal";
+        String instagramUser = view.getResources().getString(R.string.instagram_username);
         Uri uri = Uri.parse("http://instagram.com/_u/" + instagramUser);
         Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
 
@@ -116,7 +117,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public void onTwitterClicked(View view) {
 
-        String twitter_user_name = "AndroTesteur";
+        String twitter_user_name = view.getResources().getString(R.string.twitter_username);
         try {
             view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + twitter_user_name)));
         } catch (Exception e) {

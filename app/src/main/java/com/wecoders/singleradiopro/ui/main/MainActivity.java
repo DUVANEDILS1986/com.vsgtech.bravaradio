@@ -23,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.onesignal.OneSignal;
 import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.data.preferences.PrefManager;
+import com.wecoders.singleradiopro.data.repositories.MainActivityRepository;
 import com.wecoders.singleradiopro.databinding.ActivityMainBinding;
 import com.wecoders.singleradiopro.databinding.NavHeaderMainBinding;
 import com.wecoders.singleradiopro.ui.about.AboutActivity;
@@ -51,7 +52,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        model = new ViewModelProvider(this).get(MainActivityViewModel.class);
+
+        MainActivityRepository repository = new MainActivityRepository(this);
+        MainActivityFactory factory = new MainActivityFactory(repository,this);
+        model = new ViewModelProvider(this,factory).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
 
         MobileAds.initialize(this, initializationStatus -> {

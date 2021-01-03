@@ -14,6 +14,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.data.network.responses.Response;
@@ -28,7 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class MainActivityViewModel extends AndroidViewModel {
+public class MainActivityViewModel extends ViewModel {
 
 
     private RadioManager radioManager;
@@ -45,10 +46,9 @@ public class MainActivityViewModel extends AndroidViewModel {
         stopPlayer();
     };
 
-    public MainActivityViewModel(@NonNull Application application) {
-        super(application);
-        radioManager = RadioManager.with(application.getApplicationContext());
-        this.repository = new MainActivityRepository(application);
+    public MainActivityViewModel(Context context,MainActivityRepository repository) {
+        radioManager = RadioManager.with(context);
+        this.repository = repository;
         radioObjectLiveData = repository.getRadio();
     }
 

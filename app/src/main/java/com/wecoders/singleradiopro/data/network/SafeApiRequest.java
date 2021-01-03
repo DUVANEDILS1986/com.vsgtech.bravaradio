@@ -1,5 +1,6 @@
 package com.wecoders.singleradiopro.data.network;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -42,8 +43,9 @@ public class SafeApiRequest {
 
     private static void showDialog(Context context, Throwable t) {
         if (t instanceof NoConnectivityException) {
+            Activity activity = (Activity) context;
             NoConnectivityDialog dialog = NoConnectivityDialog.newInstance();
-            dialog.show(((FragmentActivity) context).getSupportFragmentManager(), NO_CONNECTIVITY_DIALOG);
+            dialog.show(((FragmentActivity)activity).getSupportFragmentManager(), NO_CONNECTIVITY_DIALOG);
         }
     }
 }

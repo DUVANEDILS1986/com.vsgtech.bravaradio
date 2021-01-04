@@ -25,6 +25,9 @@ import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
+import com.google.android.exoplayer2.metadata.Metadata;
+import com.google.android.exoplayer2.metadata.MetadataOutput;
+import com.google.android.exoplayer2.metadata.icy.IcyInfo;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
@@ -37,13 +40,17 @@ import com.icreo.perufolkradio.data.network.responses.Radio;
 
 import org.greenrobot.eventbus.EventBus;
 
-public class RadioService extends Service implements Player.EventListener, AudioManager.OnAudioFocusChangeListener {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RadioService extends Service implements Player.EventListener, AudioManager.OnAudioFocusChangeListener, MetadataOutput {
 
     public static final String ACTION_PLAY = "com.mcakir.radio.player.ACTION_PLAY";
     public static final String ACTION_PAUSE = "com.mcakir.radio.player.ACTION_PAUSE";
     public static final String ACTION_STOP = "com.mcakir.radio.player.ACTION_STOP";
 
     private final IBinder iBinder = new LocalBinder();
+    MetadataListener callbacks;
 
     private SimpleExoPlayer exoPlayer;
     private MediaSessionCompat mediaSession;
@@ -67,6 +74,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
 
     private static final String TAG = "RadioService";
+
 
 
     public class LocalBinder extends Binder {
@@ -358,7 +366,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
             wifiLock.acquire();
 
         }
-
+        exoPlayer.addMetadataOutput(this);
         exoPlayer.prepare(buildMediaSource(streamUrl));
         exoPlayer.setPlayWhenReady(true);
     }
@@ -375,6 +383,97 @@ public class RadioService extends Service implements Player.EventListener, Audio
         }
 
     }
+
+    public void setCallbacks(MetadataListener callbacks) {
+        this.callbacks = callbacks;
+    }
+
+
+    @Override
+    public void onMetadata(Metadata metadata) {
+        Log.e("Metadata is --->>>", metadata.toString());
+
+        for (int i = 0; i < metadata.length(); i++) {
+            Metadata.Entry entry = metadata.get(i);
+            // Log.e("onMetadata: IcyInfo", entry.toString());
+            if (entry instanceof IcyInfo) {
+                callbacks.onMetadataUpdated(((IcyInfo) entry).title, ((IcyInfo) entry).url);
+            } else {
+                try {
+                    callbacks.onMetadataUpdated(getArtistAndContent(metadata.toString()), getAlbumArt(metadata.toString()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+    private String getArtistAndContent(String metaString) throws Exception {
+
+        String firstString = "";
+        String secondString = "";
+        Pattern p = Pattern.compile("(TIT2.*value)=(.*)(TPE1)");
+        Matcher m;
+
+        m = p.matcher(metaString);
+        if (m.find()) {
+            firstString = m.group(2).trim();
+            if (firstString.endsWith(",")) {
+                firstString = firstString.substring(0, firstString.length() - 1);
+            }
+            Log.e("First value", " -> " + firstString);
+        }
+
+        Pattern p1 = Pattern.compile("(TPE1.*value)=(.*)(WXXX)");
+        Matcher m1;
+
+        m1 = p1.matcher(metaString);
+        if (m1.find()) {
+            secondString = m1.group(2).trim();
+            if (secondString.endsWith(",")) {
+                secondString = secondString.substring(0, secondString.length() - 1);
+            }
+            Log.e("Second value", " -> " + secondString);
+        }
+
+        String fullString = "null";
+
+        try {
+            fullString = firstString + " - " + secondString;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return fullString;
+    }
+
+    private String getAlbumArt(String metaString) throws Exception {
+
+        if (!metaString.contains("amgArtworkURL"))
+            return "";
+
+        String albumArt = "";
+        Pattern p = Pattern.compile("(.*amgArtworkURL=\")(.*)(\"\\slength)");
+        Matcher m;
+
+        m = p.matcher(metaString);
+        if (m.find()) {
+            albumArt = m.group(2).trim();
+            Log.e("Album Art", " -> " + albumArt);
+        }
+
+        String url = "";
+
+        try {
+            url = albumArt;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return url;
+    }
+
 
     public void resume() {
 

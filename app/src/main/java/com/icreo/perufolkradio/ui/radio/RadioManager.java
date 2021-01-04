@@ -22,7 +22,7 @@ public class RadioManager {
 
     private boolean serviceBound;
 
-
+    MetadataListener callback;
 
     private static final String TAG = "RadioManager";
 
@@ -61,8 +61,8 @@ public class RadioManager {
             service.stopPlayer();
     }
 
-    public void bind() {
-
+    public void bind(MetadataListener callback) {
+        this.callback = callback;
         Intent intent = new Intent(context, RadioService.class);
         context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 
@@ -79,6 +79,7 @@ public class RadioManager {
         public void onServiceConnected(ComponentName arg0, IBinder binder) {
             service = ((RadioService.LocalBinder) binder).getService();
             serviceBound = true;
+            service.setCallbacks(callback);
         }
 
         @Override

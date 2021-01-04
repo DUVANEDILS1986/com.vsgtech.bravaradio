@@ -17,9 +17,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
+import com.icreo.perufolkradio.ui.radio.MetadataListener;
 import com.onesignal.OneSignal;
 import com.icreo.perufolkradio.R;
 import com.icreo.perufolkradio.data.preferences.PrefManager;
@@ -35,7 +37,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MetadataListener {
     SwitchCompat drawerSwitch;
     MainActivityViewModel model;
     ActivityMainBinding binding;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     boolean minimizeFlag = false;
     public String SWITCH_KEY = "SWITCH_KEY";
     private String privacyPolicyUrl;
-
+    String oldTitle = "oldTitle";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        model.bind();
+        model.bind(this);
     }
 
 
@@ -290,4 +292,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public void onMetadataUpdated(String title, String albumArtUrl) {
+
+        Log.e("Album art is:", albumArtUrl + "");
+
+        /*if(!oldTitle.equalsIgnoreCase(title)){
+            oldTitle = title;
+            Log.e("artist is:", title);
+            mainBinding.playerLayout.genreTextView.setText(title);
+            String url;
+
+            try {
+                if (albumArtUrl.contains("http")) {
+                    url = albumArtUrl.replace("\"", "").replace("\"", "");
+                } else {
+                    url = viewModel.radio.getValue().getImage();
+                }
+
+
+                Glide
+                        .with(this)
+                        .load(url)
+                        .placeholder(R.drawable.placeholder)
+                        .error(Glide.with(mainBinding.playerLayout.radioLogoImageView).load(viewModel.radio.getValue().getImage()))
+                        .into(mainBinding.playerLayout.radioLogoImageView);
+
+            } catch (Exception ignored) {
+            }
+        }*/
+
+
+    }
 }

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.wecoders.singleradiopro.ui.main.MainActivityViewModel" />
+            type="com.icreo.perufolkradio.ui.main.MainActivityViewModel" />
     </data>
 
 

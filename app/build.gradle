@@ -14,7 +14,6 @@ repositories {
 
 
 
-
 apply plugin: 'com.android.application'
 
 apply plugin: 'com.google.gms.google-services'
@@ -26,7 +25,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.wecoders.singleradiopro"
+        applicationId "com.icreo.perufolkradio"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -36,7 +35,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         manifestPlaceholders = [
-                onesignal_app_id: '95b236b1-1e81-4e5b-ae46-b887a3069b61',
+                onesignal_app_id: '944f4aa5-07bf-4e67-aeba-795ab55c8645',
                 // Project number pulled from dashboard, local value is ignored.
                 onesignal_google_project_number: 'REMOTE'
         ]

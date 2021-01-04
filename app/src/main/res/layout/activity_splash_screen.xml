@@ -23,17 +23,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            app:cardBackgroundColor="@color/colorGrey"
+            app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="20dp"
-            app:cardElevation="10dp">
+           >
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="120dp"
-                android:background="@color/colorPrimaryLight"
                 android:layout_height="120dp"
-                android:src="@drawable/icon"
-               />
+                android:background="@color/colorPrimaryLight"
+                android:src="@drawable/icon" />
 
 
         </com.google.android.material.card.MaterialCardView>

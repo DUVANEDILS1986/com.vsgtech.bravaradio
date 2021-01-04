@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Single Radio Pro</string>
+    <string name="app_name">PeruFolkRadio</string>
 
 
     <!--Replace this with your base url-->
@@ -65,7 +65,7 @@
     <string name="profile">Profile</string>
     <string name="version">Version</string>
     <string name="description">Description</string>
-    <string name="yourcompany_gmail_com">yourcompany@gmail.com</string>
+    <string name="yourcompany_gmail_com">apps@perufolkradio.com</string>
     <string name="about_description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.</string>
 
     <!--    response form-->
@@ -74,10 +74,15 @@
     <string name="error_field_empty">Field is empty</string>
 
     <!--Social Media-->
-    <string name="fb_page_username">w3cod3rs</string>
+    <string name="fb_page_username">perufolkradio</string>
     <string name="fb_page_id">106864031155552</string>
-    <string name="instagram_username">because.nepal</string>
+    <string name="instagram_username">perufolkradio</string>
     <string name="twitter_username">AndroTesteur</string>
+    <string name="whatsApp_number">51948648500</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="whatsapp">WhatsApp</string>
 
 
 </resources>

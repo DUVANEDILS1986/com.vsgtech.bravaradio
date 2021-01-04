@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wecoders.singleradiopro">
+    package="com.icreo.perufolkradio">
 
     <application
-        android:name=".util.RadioApplication"
+        android:name="com.icreo.perufolkradio.util.RadioApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,16 +13,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".ui.feedback.FeedbackActivity"
+        <activity android:name="com.icreo.perufolkradio.ui.feedback.FeedbackActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true"/>
 
-        <activity android:name=".ui.about.AboutActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.icreo.perufolkradio.ui.about.AboutActivity" android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.icreo.perufolkradio.ui.main.MainActivity"
             android:launchMode="singleTask" android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.SplashScreenActivity"
+            android:name="com.icreo.perufolkradio.ui.SplashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".ui.radio.RadioService" />
+        <service android:name="com.icreo.perufolkradio.ui.radio.RadioService" />
     </application>
 
     <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />

@@ -20,6 +20,7 @@ import com.icreo.perufolkradio.data.network.responses.Response;
 import com.icreo.perufolkradio.data.network.responses.Radio;
 import com.icreo.perufolkradio.data.repositories.MainActivityRepository;
 import com.icreo.perufolkradio.ui.player.TimerDialog;
+import com.icreo.perufolkradio.ui.radio.MetadataListener;
 import com.icreo.perufolkradio.ui.radio.RadioManager;
 import com.icreo.perufolkradio.util.AppUtil;
 
@@ -186,8 +187,9 @@ public class MainActivityViewModel extends AndroidViewModel {
         return radioManager.isPlaying();
     }
 
-    public void bind() {
-        radioManager.bind();
+
+    public void bind(MetadataListener callback) {
+        radioManager.bind(callback);
     }
 
     public void unbind() {

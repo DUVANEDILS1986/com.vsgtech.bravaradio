@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 privacyPolicyUrl = response.getPrivacyPolicy();
                 model.radio = response;
                 binding.appBarMainLayout.setRadio(response);
+                model.onPlayClicked(null);
                 navHeaderMainBinding.setRadio(response);
 
             } catch (Exception ignored) {
@@ -262,17 +263,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (status.equals(PlaybackStatus.PLAYING)) {
-            binding.appBarMainLayout.btnPlayStop.setText(R.string.stop);
-            binding.appBarMainLayout.btnPlayStop.setIconResource(R.drawable.ic_stop);
+            binding.appBarMainLayout.btnPlayStop.setImageResource(R.drawable.ic_stop);
             binding.appBarMainLayout.animationView.playAnimation();
 
         } else {
-            binding.appBarMainLayout.btnPlayStop.setText(R.string.play);
-            binding.appBarMainLayout.btnPlayStop.setIconResource(R.drawable.ic_play);
+            binding.appBarMainLayout.btnPlayStop.setImageResource(R.drawable.ic_play);
             binding.appBarMainLayout.animationView.pauseAnimation();
         }
 
-        binding.appBarMainLayout.btnPlayStop.setIconGravity(MaterialButton.ICON_GRAVITY_END);
 
 
     }

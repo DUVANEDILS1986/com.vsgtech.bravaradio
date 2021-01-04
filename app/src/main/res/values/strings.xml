@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Single Radio Pro</string>
+    <string name="app_name">PeruFolkRadio</string>
 
 
     <!--Replace this with your base url-->
@@ -65,7 +65,7 @@
     <string name="profile">Profile</string>
     <string name="version">Version</string>
     <string name="description">Description</string>
-    <string name="yourcompany_gmail_com">yourcompany@gmail.com</string>
+    <string name="yourcompany_gmail_com">apps@perufolkradio.com</string>
     <string name="about_description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.</string>
 
     <!--    response form-->

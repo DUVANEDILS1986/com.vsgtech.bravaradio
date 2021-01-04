@@ -406,11 +406,11 @@
 
         <variable
             name="viewmodel"
-            type="com.wecoders.singleradiopro.ui.main.MainActivityViewModel" />
+            type="com.icreo.perufolkradio.ui.main.MainActivityViewModel" />
 
         <variable
             name="radio"
-            type="com.wecoders.singleradiopro.data.network.responses.Radio" />
+            type="com.icreo.perufolkradio.data.network.responses.Radio" />
 
     </data>
 

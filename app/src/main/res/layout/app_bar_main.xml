@@ -144,12 +144,15 @@
 
 
                 <TextView
-                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
                     android:id="@+id/meta_title"
-                    android:layout_width="wrap_content"
+                    style="@style/TextAppearance.MdcTypographyStyles.Body1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Meta title"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text=""
+                    android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/radioNameTextView" />

@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
+import com.icreo.perufolkradio.data.repositories.MainActivityRepository;
 import com.icreo.perufolkradio.ui.radio.MetadataListener;
 import com.onesignal.OneSignal;
 import com.icreo.perufolkradio.R;
@@ -53,7 +54,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        model = new ViewModelProvider(this).get(MainActivityViewModel.class);
+
+        MainActivityRepository repository = new MainActivityRepository(this);
+        MainFactory factory = new MainFactory(this,repository);
+        model = new ViewModelProvider(this,factory).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
 
         MobileAds.initialize(this, initializationStatus -> {

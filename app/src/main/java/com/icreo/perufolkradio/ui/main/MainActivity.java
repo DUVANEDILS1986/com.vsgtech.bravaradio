@@ -15,6 +15,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -22,6 +23,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.icreo.perufolkradio.ui.radio.MetadataListener;
+import com.icreo.perufolkradio.util.NoConnectivityDialog;
 import com.onesignal.OneSignal;
 import com.icreo.perufolkradio.R;
 import com.icreo.perufolkradio.data.preferences.PrefManager;
@@ -324,4 +326,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     }
+
 }

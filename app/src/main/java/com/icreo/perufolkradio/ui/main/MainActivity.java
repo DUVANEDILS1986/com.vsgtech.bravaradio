@@ -301,17 +301,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Log.e("Album art is:", albumArtUrl + "");
 
-        /*if(!oldTitle.equalsIgnoreCase(title)){
+        if(!oldTitle.equalsIgnoreCase(title)){
             oldTitle = title;
             Log.e("artist is:", title);
-            mainBinding.playerLayout.genreTextView.setText(title);
+            binding.appBarMainLayout.metaTitle.setText(title);
             String url;
 
             try {
                 if (albumArtUrl.contains("http")) {
                     url = albumArtUrl.replace("\"", "").replace("\"", "");
                 } else {
-                    url = viewModel.radio.getValue().getImage();
+                    url = model.radioObjectLiveData.getValue().getImage();
                 }
 
 
@@ -319,12 +319,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .with(this)
                         .load(url)
                         .placeholder(R.drawable.placeholder)
-                        .error(Glide.with(mainBinding.playerLayout.radioLogoImageView).load(viewModel.radio.getValue().getImage()))
-                        .into(mainBinding.playerLayout.radioLogoImageView);
+                        .error(Glide.with(binding.appBarMainLayout.imageView).load(model.radioObjectLiveData.getValue().getImage()))
+                        .into(binding.appBarMainLayout.imageView);
 
             } catch (Exception ignored) {
             }
-        }*/
+        }
 
 
     }

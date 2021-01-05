@@ -59,7 +59,8 @@ public class AdsUtil {
                 @Override
                 public void onAdLoaded() {
                     super.onAdLoaded();
-                    layoutAdContainer.setVisibility(View.VISIBLE);
+                   // layoutAdContainer.setVisibility(View.VISIBLE);
+                    layoutAdContainer.setVisibility(View.GONE);
                 }
             });
 
@@ -114,12 +115,11 @@ public class AdsUtil {
             }
         });
 
-
     }
 
     public static void showInterstitialAd(InterstitialAd mInterstitialAd) {
         if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
+           // mInterstitialAd.show();
         }
     }
 }

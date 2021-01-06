@@ -17,9 +17,9 @@ public class MainActivityRepository extends SafeApiRequest {
     private MyApi api;
     Context context;
 
-    public MainActivityRepository(Application application) {
-        this.context = application.getApplicationContext();
-        SetupRetrofit setupRetrofit = new SetupRetrofit(application.getApplicationContext());
+    public MainActivityRepository(Context context) {
+        this.context = context;
+        SetupRetrofit setupRetrofit = new SetupRetrofit(context);
         this.api = SetupRetrofit.createService(MyApi.class);
     }
 

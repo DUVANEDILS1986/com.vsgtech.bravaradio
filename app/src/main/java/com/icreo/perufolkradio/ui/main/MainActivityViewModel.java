@@ -144,7 +144,21 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public void onReportStreamClicked(View view) {
-        AppUtil.showReportDialog(view.getContext(), new AppUtil.AlertDialogListener() {
+
+        final String appPackageName = view.getContext().getPackageName();
+        try {
+            view.getContext().startActivity(new Intent(
+                    Intent.ACTION_VIEW, Uri
+                    .parse("market://details?id="
+                            + appPackageName)));
+        } catch (android.content.ActivityNotFoundException exception) {
+            view.getContext().startActivity(new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id="
+                            + appPackageName)));
+        }
+
+        /*AppUtil.showReportDialog(view.getContext(), new AppUtil.AlertDialogListener() {
             @Override
             public void onPositive() {
                 MutableLiveData<Response> flag = repository.reportRadio();
@@ -155,7 +169,7 @@ public class MainActivityViewModel extends ViewModel {
             public void onCancel() {
 
             }
-        });
+        });*/
     }
 
     public void onSetTimerClicked(View view) {

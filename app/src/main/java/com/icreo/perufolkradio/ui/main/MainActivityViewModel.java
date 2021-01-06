@@ -179,6 +179,15 @@ public class MainActivityViewModel extends ViewModel {
         timerDialog.show();
     }
 
+    public void onShareClicked(View view, String radioName) {
+        final String appPackageName = view.getContext().getPackageName();
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey! I am listening " + radioName + ". Download the app and listen to different radio stations https://play.google.com/store/apps/details?id="
+                + appPackageName);
+        view.getContext().startActivity(Intent.createChooser(shareIntent, "Share Via:"));
+    }
+
     public void onPlayClicked(View view) {
 
         if (radio != null && radioManager != null) {

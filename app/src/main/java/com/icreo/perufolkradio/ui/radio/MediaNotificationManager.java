@@ -116,7 +116,7 @@ public class MediaNotificationManager {
                 .setLargeIcon(largeIcon[0])
                 .setContentIntent(pendingIntent)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setSmallIcon(R.drawable.ic_radio_icon)
+                .setSmallIcon(R.drawable.ic_logo)
                 .addAction(icon, "pause", action)
                 .addAction(R.drawable.ic_close, "stop", stopAction)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

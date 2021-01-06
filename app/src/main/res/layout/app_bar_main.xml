@@ -113,6 +113,7 @@
                         android:layout_marginEnd="@dimen/player_icons_margin"
                         android:background="@drawable/bg_circle"
                         android:paddingEnd="4dp"
+                        android:onClick="@{(view) -> viewmodel.onShareClicked(view, radio.name)}"
                         app:srcCompat="@drawable/ic_share" />
 
 

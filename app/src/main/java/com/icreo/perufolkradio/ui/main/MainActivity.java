@@ -2,11 +2,35 @@ package com.icreo.perufolkradio.ui.main;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.navigation.NavigationView;
+import com.icreo.perufolkradio.R;
+import com.icreo.perufolkradio.data.preferences.PrefManager;
+import com.icreo.perufolkradio.data.repositories.MainActivityRepository;
+import com.icreo.perufolkradio.databinding.ActivityMainBinding;
+import com.icreo.perufolkradio.databinding.NavHeaderMainBinding;
+import com.icreo.perufolkradio.ui.about.AboutActivity;
+import com.icreo.perufolkradio.ui.feedback.FeedbackActivity;
+import com.icreo.perufolkradio.ui.radio.MetadataListener;
+import com.icreo.perufolkradio.ui.radio.PlaybackStatus;
+import com.icreo.perufolkradio.util.AdsUtil;
+import com.icreo.perufolkradio.util.AppUtil;
+import com.onesignal.OneSignal;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.TimerTask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,29 +39,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.bumptech.glide.Glide;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.navigation.NavigationView;
-import com.icreo.perufolkradio.data.repositories.MainActivityRepository;
-import com.icreo.perufolkradio.ui.radio.MetadataListener;
-import com.icreo.perufolkradio.util.NoConnectivityDialog;
-import com.onesignal.OneSignal;
-import com.icreo.perufolkradio.R;
-import com.icreo.perufolkradio.data.preferences.PrefManager;
-import com.icreo.perufolkradio.databinding.ActivityMainBinding;
-import com.icreo.perufolkradio.databinding.NavHeaderMainBinding;
-import com.icreo.perufolkradio.ui.about.AboutActivity;
-import com.icreo.perufolkradio.ui.feedback.FeedbackActivity;
-import com.icreo.perufolkradio.ui.radio.PlaybackStatus;
-import com.icreo.perufolkradio.util.AdsUtil;
-import com.icreo.perufolkradio.util.AppUtil;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MetadataListener {
@@ -50,16 +52,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String privacyPolicyUrl;
     String oldTitle = "oldTitle";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         MainActivityRepository repository = new MainActivityRepository(this);
-        MainFactory factory = new MainFactory(this,repository);
-        model = new ViewModelProvider(this,factory).get(MainActivityViewModel.class);
+        MainFactory factory = new MainFactory(this, repository);
+        model = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
         binding.setViewmodel(model);
 
         MobileAds.initialize(this, initializationStatus -> {
@@ -301,9 +303,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onMetadataUpdated(String title, String albumArtUrl) {
 
-        Log.e("Album art is:", albumArtUrl + "");
+        //Log.e("Album art is:", albumArtUrl + "");
+        Log.e("Album art is:", title + "==" + oldTitle);
 
-        if(!oldTitle.equalsIgnoreCase(title)){
+        if (!oldTitle.equalsIgnoreCase(title)) {
+
             oldTitle = title;
             Log.e("artist is:", title);
             binding.appBarMainLayout.metaTitle.setText(title);

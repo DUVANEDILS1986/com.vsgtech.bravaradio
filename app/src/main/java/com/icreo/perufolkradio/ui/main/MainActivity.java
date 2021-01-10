@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 import com.icreo.perufolkradio.R;
@@ -98,9 +100,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 privacyPolicyUrl = response.getPrivacyPolicy();
                 model.radio = response;
                 binding.appBarMainLayout.setRadio(response);
-                model.onPlayClicked(null);
                 navHeaderMainBinding.setRadio(response);
 
+                Handler playHandler = new Handler();
+                playHandler.postDelayed(() -> model.onPlayClicked(null),1000);
             } catch (Exception ignored) {
 
             }
@@ -265,6 +268,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Subscribe
     public void onEvent(String status) {
 
+        binding.appBarMainLayout.progressBar.setVisibility(status.equals(PlaybackStatus.LOADING) ? View.VISIBLE : View.INVISIBLE);
+
         switch (status) {
             case PlaybackStatus.PLAYING:
 
@@ -308,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (!oldTitle.equalsIgnoreCase(title)) {
 
+        if (!oldTitle.equalsIgnoreCase(title)) {
             oldTitle = title;
             Log.e("artist is:", title);
             binding.appBarMainLayout.metaTitle.setText(title);
@@ -335,4 +341,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-}
+}}

@@ -27,13 +27,11 @@ public class RadioManager {
     private static final String TAG = "RadioManager";
 
     private RadioManager(Context context) {
-        Log.d(TAG, "RadioManager: constructer");
         this.context = context;
         serviceBound = false;
     }
 
     public static RadioManager with(Context context) {
-        Log.d(TAG, "with: ");
         if (instance == null) instance = new RadioManager(context);
 
 

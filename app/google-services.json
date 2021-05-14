@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "106457319996",
-    "project_id": "perufolkradio-7c978",
-    "storage_bucket": "perufolkradio-7c978.appspot.com"
+    "project_number": "633272774717",
+    "firebase_url": "https://singleradiopro.firebaseio.com",
+    "project_id": "singleradiopro",
+    "storage_bucket": "singleradiopro.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:106457319996:android:3507bfc76fcb1ec198d139",
+        "mobilesdk_app_id": "1:633272774717:android:44d3aee1b62a1c6dfeba54",
         "android_client_info": {
-          "package_name": "com.icreo.perufolkradio"
+          "package_name": "com.wecoders.singleradiopro"
         }
       },
       "oauth_client": [
         {
-          "client_id": "106457319996-f2m5vsvlh4svv4sa0fg3o7353ca09isl.apps.googleusercontent.com",
+          "client_id": "633272774717-64i82d8n1j9upbbjdssr1851uo1dl6nv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAyUuwDoofRPkMeGYzO65ZnIRjz2jeG3DI"
+          "current_key": "AIzaSyBYUNtDIaoEZwPQxDkYqOuSyoFNSVRsVwU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "106457319996-f2m5vsvlh4svv4sa0fg3o7353ca09isl.apps.googleusercontent.com",
+              "client_id": "633272774717-64i82d8n1j9upbbjdssr1851uo1dl6nv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

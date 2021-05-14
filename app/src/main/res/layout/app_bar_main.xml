@@ -62,25 +62,26 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorPrimaryLight"
-                        android:contentDescription="@string/nav_header_desc"
-                        android:scaleType="centerCrop"
-                        android:src="@{radio.image}" />
-
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/animation_view"
-                        android:layout_width="80dp"
-                        android:layout_height="50dp"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
                         android:layout_gravity="center"
                         android:visibility="visible"
                         app:lottie_autoPlay="false"
-                        app:lottie_fileName="equalizer.json"
+                        app:lottie_fileName="circular_ripple.json"
                         app:lottie_loop="true" />
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@color/colorPrimaryLight"
+                        android:contentDescription="@string/nav_header_desc"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="center"
+                        android:src="@{radio.image}" />
+
+
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -286,11 +287,11 @@
 
         <variable
             name="viewmodel"
-            type="com.icreo.perufolkradio.ui.main.MainActivityViewModel" />
+            type="com.wecoders.singleradiopro.ui.main.MainActivityViewModel" />
 
         <variable
             name="radio"
-            type="com.icreo.perufolkradio.data.network.responses.Radio" />
+            type="com.wecoders.singleradiopro.data.network.responses.Radio" />
 
     </data>
 

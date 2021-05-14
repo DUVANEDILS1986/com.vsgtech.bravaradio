@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">PeruFolkRadio</string>
+    <string name="app_name">320 FM</string>
 
 
     <!--Replace this with your base url-->
-    <string name="base_url">"https://www.perufolkradio.app/api/"</string>
+    <string name="base_url">"https://app.320.fm/public/api/"</string>
 
     <!--Replace this Admob app_ID with your App_ID generated from Admob-->
     <string name="adMob_app_id">ca-app-pub-3940256099942544~3347511713</string>
@@ -20,7 +20,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">prensa@perufolkradio.com</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -65,10 +65,8 @@
     <string name="profile">Profile</string>
     <string name="version">Version</string>
     <string name="description">Description</string>
-    <string name="yourcompany_gmail_com">prensa@perufolkradio.com</string>
-    <string name="about_description">PERUFOLKRADIO.COM es la radio líder en música andina y latinoamericana, que te ofrece primicias, videos, entrevistas, conciertos y la más variada programación con los éxitos de nuestra música andina las 24 horas en vivo.
-
-PeruFolkRadio nace en la ciudad de Trujillo en agosto del 2006, con el objetivo informar y entretener a nuestros oyentes a través de la música que nos une.</string>
+    <string name="yourcompany_gmail_com">yourcompany@gmail.com</string>
+    <string name="about_description">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero\'s De Finibus Bonorum et Malorum for use in a type specimen book.</string>
 
     <!--    response form-->
     <string name="error_format_invalid">Format is invalid</string>
@@ -76,11 +74,11 @@ PeruFolkRadio nace en la ciudad de Trujillo en agosto del 2006, con el objetivo 
     <string name="error_field_empty">Field is empty</string>
 
     <!--Social Media-->
-    <string name="fb_page_username">perufolkradio</string>
-    <string name="fb_page_id">248030459700</string>
-    <string name="instagram_username">perufolkradio</string>
-    <string name="twitter_username">perufolkradio</string>
-    <string name="whatsApp_number">51948648500</string>
+    <string name="fb_page_username">w3cod3rs</string>
+    <string name="fb_page_id">106864031155552</string>
+    <string name="instagram_username">yourinstagramid</string>
+    <string name="twitter_username">yourtwitterid</string>
+    <string name="whatsApp_number">1234567890</string>
     <string name="facebook">Facebook</string>
     <string name="instagram">Instagram</string>
     <string name="twitter">Twitter</string>

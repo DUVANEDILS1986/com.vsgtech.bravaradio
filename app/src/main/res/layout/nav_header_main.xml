@@ -5,7 +5,7 @@
     <data>
         <variable
             name="radio"
-            type="com.icreo.perufolkradio.data.network.responses.Radio" />
+            type="com.wecoders.singleradiopro.data.network.responses.Radio" />
     </data>
 
     <LinearLayout

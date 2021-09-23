@@ -84,6 +84,7 @@
     <string name="twitter">Twitter</string>
     <string name="whatsapp">WhatsApp</string>
     <string name="acerca_de_nosotros">Acerca de nosotros</string>
+    <string name="dark_mode">Dark mode</string>
 
 
 </resources>

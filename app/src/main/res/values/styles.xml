@@ -1,10 +1,10 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -22,7 +22,7 @@
 
     <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <!-- Customize color of navigation drawer icon and back arrow -->
-        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorTextSecondary</item>
     </style>
 
     <style name="NavigationTheme" parent="AppTheme">
@@ -34,7 +34,7 @@
         <item name="fontFamily">@font/pt_sans_narrow</item>
         <item name="android:fontFamily">@font/pt_sans_narrow</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
 
@@ -42,7 +42,7 @@
         <item name="fontFamily">@font/pt_sans_narrow</item>
         <item name="android:fontFamily">@font/pt_sans_narrow</item>
         <item name="android:textSize">25sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
 
     </style>
 
@@ -50,7 +50,7 @@
         <item name="fontFamily">@font/pt_sans_narrow</item>
         <item name="android:fontFamily">@font/pt_sans_narrow</item>
         <item name="android:textSize">25sp</item>
-        <item name="android:textColor">@color/colorPrimaryDarkShade</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
 
@@ -58,7 +58,7 @@
         <item name="fontFamily">@font/open_sans_bold</item>
         <item name="android:fontFamily">@font/open_sans_bold</item>
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
 
@@ -66,35 +66,35 @@
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
     <style name="TextAppearance.MdcTypographyStyles.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
     <style name="TextAppearance.MdcTypographyStyles.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
     <style name="TextAppearance.MdcTypographyStyles.Body3" parent="TextAppearance.MaterialComponents.Body1">
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/colorGrey</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
     <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:fontFamily">@font/open_sans_bold</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
 

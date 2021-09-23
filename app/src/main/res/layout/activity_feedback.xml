@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
             type="com.wecoders.singleradiopro.ui.feedback.FeedbackViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorBackground"
         tools:context=".ui.feedback.FeedbackActivity">
 
         <include
@@ -44,6 +44,7 @@
                 style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorTextPrimary"
                 android:text="@={viewModel.feedback.email}"
                 app:onFocus="@{viewModel.onFocusEmail}"
                 android:inputType="textEmailAddress" />
@@ -73,6 +74,7 @@
                 style="@style/TextAppearance.MdcTypographyStyles.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorTextPrimary"
                 android:text="@={viewModel.feedback.subject}"
                 app:onFocus="@{viewModel.onFocusSubject}"
                 />
@@ -103,6 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="top"
+                android:textColor="@color/colorTextPrimary"
                 android:text="@={viewModel.feedback.message}"
                 app:onFocus="@{viewModel.onFocusMessage}"
                 />
@@ -117,13 +120,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
-            android:text="@string/submit"
             android:enabled="@{viewModel.feedback.valid}"
             android:onClick="@{viewModel::onSubmit}"
-            app:backgroundTint="@color/colorAccent"
+            android:text="@string/submit"
+            app:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/messageTextField" />
 
 
 

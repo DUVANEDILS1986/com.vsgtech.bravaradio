@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -40,14 +42,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MetadataListener {
     SwitchCompat drawerSwitch;
+    SwitchCompat darkModeSwitch;
     MainActivityViewModel model;
     ActivityMainBinding binding;
     boolean exitFlag = false;
     boolean minimizeFlag = false;
     public String SWITCH_KEY = "SWITCH_KEY";
+    public String DARK_MODE_KEY = "DARK_MODE_KEY";
     private String privacyPolicyUrl;
     String oldTitle = "oldTitle";
 
@@ -59,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         MainActivityRepository repository = new MainActivityRepository(this);
-        MainActivityFactory factory = new MainActivityFactory(repository,this);
-        model = new ViewModelProvider(this,factory).get(MainActivityViewModel.class);
+        MainActivityFactory factory = new MainActivityFactory(repository, this);
+        model = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
 
         binding.setViewmodel(model);
 
@@ -79,16 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         binding.navView.setNavigationItemSelectedListener(this);
-      /*  binding.appBarMainLayout.bottomNav.setOnNavigationItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.navigation_home) {
-                if (binding.drawerLayout.isDrawerOpen(GravityCompat.END))
-                    binding.drawerLayout.closeDrawer(GravityCompat.END);
 
-            } else if (item.getItemId() == R.id.navigation_settings)
-                if (!binding.drawerLayout.isDrawerOpen(GravityCompat.END))
-                    binding.drawerLayout.openDrawer(GravityCompat.END);
-            return false;
-        });*/
 
         binding.appBarMainLayout.btnMenu.setOnClickListener(view -> {
             binding.drawerLayout.openDrawer(GravityCompat.END);
@@ -108,6 +102,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } else {
                 new PrefManager<Boolean>(this).set(SWITCH_KEY, false);
                 OneSignal.setSubscription(false);
+            }
+
+        });
+
+        //dark mode
+        darkModeSwitch = (SwitchCompat) binding.navView.getMenu().findItem(R.id.nav_dark_mode).getActionView();
+        darkModeSwitch.setChecked(new PrefManager<Boolean>(this).get(DARK_MODE_KEY, true));
+
+        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if (isChecked) {
+                new PrefManager<Boolean>(this).set(DARK_MODE_KEY, true);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                new PrefManager<Boolean>(this).set(DARK_MODE_KEY, false);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
             }
 
         });
@@ -313,7 +324,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-
     }
 
 
@@ -325,32 +335,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (!oldTitle.equalsIgnoreCase(title)) {
 
-        if (!oldTitle.equalsIgnoreCase(title)) {
-            oldTitle = title;
-            Log.e("artist is:", title);
-            binding.appBarMainLayout.metaTitle.setText(title);
-            String url;
+            if (!oldTitle.equalsIgnoreCase(title)) {
+                oldTitle = title;
+                Log.e("artist is:", title);
+                binding.appBarMainLayout.metaTitle.setText(title);
+                String url;
 
-            try {
-                if (albumArtUrl.contains("http")) {
-                    url = albumArtUrl.replace("\"", "").replace("\"", "");
-                } else {
-                    url = model.radioObjectLiveData.getValue().getImage();
+                try {
+                    if (albumArtUrl.contains("http")) {
+                        url = albumArtUrl.replace("\"", "").replace("\"", "");
+                    } else {
+                        url = model.radioObjectLiveData.getValue().getImage();
+                    }
+
+
+                    Glide
+                            .with(this)
+                            .load(url)
+                            .placeholder(R.drawable.placeholder)
+                            .error(Glide.with(binding.appBarMainLayout.imageView).load(model.radioObjectLiveData.getValue().getImage()))
+                            .into(binding.appBarMainLayout.imageView);
+
+                } catch (Exception ignored) {
                 }
-
-
-                Glide
-                        .with(this)
-                        .load(url)
-                        .placeholder(R.drawable.placeholder)
-                        .error(Glide.with(binding.appBarMainLayout.imageView).load(model.radioObjectLiveData.getValue().getImage()))
-                        .into(binding.appBarMainLayout.imageView);
-
-            } catch (Exception ignored) {
             }
+
+
         }
 
-
     }
-
-}}
+}

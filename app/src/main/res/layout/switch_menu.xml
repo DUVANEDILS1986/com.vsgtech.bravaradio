@@ -4,6 +4,6 @@
     android:layout_height="60dp"
     android:layout_gravity="start"
     android:fontFamily="@font/open_sans"
-    android:textColor="@color/colorWhite"
+    android:textColor="@color/colorTextPrimary"
     android:text=""
     android:textSize="16sp" />

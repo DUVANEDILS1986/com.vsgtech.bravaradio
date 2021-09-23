@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorBackgroundSecondary"
         android:gravity="bottom|center"
         android:orientation="vertical"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -46,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:textColor="@color/colorTextPrimary"
             android:text="@{radio.name}" />
 
         <LinearLayout
@@ -63,7 +64,7 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="@string/yourcompany_gmail_com"
-                android:textColor="#BDBDBD"
+                android:textColor="@color/colorTextSecondary"
                 app:layout_constraintEnd_toEndOf="@+id/radioNameTextView"
                 app:layout_constraintStart_toStartOf="@+id/radioNameTextView"
                 app:layout_constraintTop_toBottomOf="@+id/radioNameTextView" />

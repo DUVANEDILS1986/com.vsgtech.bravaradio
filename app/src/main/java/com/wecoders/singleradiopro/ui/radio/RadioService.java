@@ -422,7 +422,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
             if (firstString.endsWith(",")) {
                 firstString = firstString.substring(0, firstString.length() - 1);
             }
-            Log.e("First value", " -> " + firstString);
+            //Log.e("First value", " -> " + firstString);
         }
 
         Pattern p1 = Pattern.compile("(TPE1.*value)=(.*)(WXXX)");
@@ -434,7 +434,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
             if (secondString.endsWith(",")) {
                 secondString = secondString.substring(0, secondString.length() - 1);
             }
-            Log.e("Second value", " -> " + secondString);
+           // Log.e("Second value", " -> " + secondString);
         }
 
         String fullString = "null";

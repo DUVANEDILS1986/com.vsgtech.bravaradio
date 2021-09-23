@@ -2,13 +2,13 @@ package com.wecoders.singleradiopro.ui.main;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +20,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.wecoders.singleradiopro.data.repositories.MainActivityRepository;
 import com.wecoders.singleradiopro.ui.radio.MetadataListener;
@@ -35,8 +34,10 @@ import com.wecoders.singleradiopro.ui.radio.PlaybackStatus;
 import com.wecoders.singleradiopro.util.AdsUtil;
 import com.wecoders.singleradiopro.util.AppUtil;
 
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MetadataListener {
@@ -49,10 +50,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String privacyPolicyUrl;
     String oldTitle = "oldTitle";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
@@ -317,7 +318,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onMetadataUpdated(String title, String albumArtUrl) {
 
-        Log.e("Album art is:", albumArtUrl + "");
+        //Log.e("Album art is:", albumArtUrl + "");
+        Log.e("Album art is:", title + "==" + oldTitle);
+
+        if (!oldTitle.equalsIgnoreCase(title)) {
 
         if (!oldTitle.equalsIgnoreCase(title)) {
             oldTitle = title;
@@ -347,4 +351,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-}
+}}

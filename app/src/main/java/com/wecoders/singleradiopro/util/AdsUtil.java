@@ -18,6 +18,7 @@ import com.wecoders.singleradiopro.R;
 public class AdsUtil {
 
     //This holds
+
     public static int ADS_LOAD_COUNT = 0;
     public static int SHOW_ADS_WHEN_TAB_COUNT = 1; //change this to the desired number you want.
 
@@ -112,7 +113,6 @@ public class AdsUtil {
                 super.onAdLoaded();
             }
         });
-
 
     }
 

@@ -2,12 +2,13 @@ package com.wecoders.singleradiopro.ui.main;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,9 +18,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
+import com.wecoders.singleradiopro.data.repositories.MainActivityRepository;
+import com.wecoders.singleradiopro.ui.radio.MetadataListener;
 import com.onesignal.OneSignal;
 import com.wecoders.singleradiopro.R;
 import com.wecoders.singleradiopro.data.preferences.PrefManager;
@@ -32,11 +35,13 @@ import com.wecoders.singleradiopro.ui.radio.PlaybackStatus;
 import com.wecoders.singleradiopro.util.AdsUtil;
 import com.wecoders.singleradiopro.util.AppUtil;
 
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MetadataListener {
     SwitchCompat drawerSwitch;
     MainActivityViewModel model;
     ActivityMainBinding binding;
@@ -44,18 +49,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     boolean minimizeFlag = false;
     public String SWITCH_KEY = "SWITCH_KEY";
     private String privacyPolicyUrl;
+    String oldTitle = "oldTitle";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         MainActivityRepository repository = new MainActivityRepository(this);
         MainActivityFactory factory = new MainActivityFactory(repository,this);
         model = new ViewModelProvider(this,factory).get(MainActivityViewModel.class);
+
         binding.setViewmodel(model);
 
         MobileAds.initialize(this, initializationStatus -> {
@@ -63,9 +69,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         AdsUtil.loadBannerAd(this, binding.appBarMainLayout.adLayout);
 
-        setSupportActionBar(binding.appBarMainLayout.toolbar);
-        getSupportActionBar().setTitle("");
-
+        //setSupportActionBar(binding.appBarMainLayout.toolbar);
+        //getSupportActionBar().setTitle("");
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -74,32 +79,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         binding.navView.setNavigationItemSelectedListener(this);
+      /*  binding.appBarMainLayout.bottomNav.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.navigation_home) {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.END))
+                    binding.drawerLayout.closeDrawer(GravityCompat.END);
 
-        View view = binding.navView.getHeaderView(0);
-        NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.bind(view);
+            } else if (item.getItemId() == R.id.navigation_settings)
+                if (!binding.drawerLayout.isDrawerOpen(GravityCompat.END))
+                    binding.drawerLayout.openDrawer(GravityCompat.END);
+            return false;
+        });*/
 
-
-        model.getReportResponseLiveData().observe(this, response -> {
-            try {
-                Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
-            } catch (Exception ignored) {
-
-            }
-
+        binding.appBarMainLayout.btnMenu.setOnClickListener(view -> {
+            binding.drawerLayout.openDrawer(GravityCompat.END);
         });
 
-        model.getRadioLiveData().observe(this, response -> {
-            try {
-                privacyPolicyUrl = response.getPrivacyPolicy();
-                model.radio = response;
-                binding.appBarMainLayout.setRadio(response);
-                navHeaderMainBinding.setRadio(response);
 
-            } catch (Exception ignored) {
-
-            }
-
-        });
+        observeValues();
 
         drawerSwitch = (SwitchCompat) binding.navView.getMenu().findItem(R.id.nav_notification).getActionView();
         drawerSwitch.setChecked(new PrefManager<Boolean>(this).get(SWITCH_KEY, true));
@@ -117,6 +113,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+    }
+
+    private void observeValues() {
+        View view = binding.navView.getHeaderView(0);
+        NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.bind(view);
+        model.getReportResponseLiveData().observe(this, response -> {
+            try {
+                Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+            } catch (Exception ignored) {
+
+            }
+
+        });
+
+        model.getRadioLiveData().observe(this, response -> {
+            try {
+                privacyPolicyUrl = response.getPrivacyPolicy();
+                model.radio = response;
+                binding.appBarMainLayout.setRadio(response);
+                navHeaderMainBinding.setRadio(response);
+
+                Handler playHandler = new Handler();
+                playHandler.postDelayed(() -> model.onPlayClicked(null), 1000);
+            } catch (Exception ignored) {
+
+            }
+
+        });
     }
 
 
@@ -180,9 +204,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
+//        social
+        else if (id == R.id.nav_facebook) {
+            model.onFacebookClicked(this);
+        } else if (id == R.id.nav_insta) {
+
+            model.onInstagramClicked(this);
+
+        } else if (id == R.id.nav_twitter) {
+
+            model.onTwitterClicked(this);
+
+        } else if (id == R.id.nav_whatsApp) {
+
+            model.onWhatsAppClicked(this);
+
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.END);
         return true;
     }
 
@@ -208,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        model.bind();
+        model.bind(this);
     }
 
 
@@ -243,43 +283,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Subscribe
     public void onEvent(String status) {
 
+        binding.appBarMainLayout.progressBar.setVisibility(status.equals(PlaybackStatus.LOADING) ? View.VISIBLE : View.INVISIBLE);
+
         switch (status) {
             case PlaybackStatus.PLAYING:
-
+                binding.appBarMainLayout.btnPlayStop.setEnabled(true);
+                binding.appBarMainLayout.btnPlayStop.setIcon(getResources().getDrawable(R.drawable.ic_stop));
+                binding.appBarMainLayout.btnPlayStop.setText("STOP");
+                binding.appBarMainLayout.animationView.playAnimation();
                 break;
 
             case PlaybackStatus.LOADING:
-
-                // loading
-
+                binding.appBarMainLayout.btnPlayStop.setEnabled(false);
                 break;
 
 
             case PlaybackStatus.ERROR:
-
+                binding.appBarMainLayout.btnPlayStop.setEnabled(true);
                 Toast.makeText(this, "Error loading radio.", Toast.LENGTH_SHORT).show();
                 break;
 
             case PlaybackStatus.PAUSED:
+                binding.appBarMainLayout.btnPlayStop.setEnabled(true);
+                binding.appBarMainLayout.btnPlayStop.setIcon(getResources().getDrawable(R.drawable.ic_play));
+                binding.appBarMainLayout.btnPlayStop.setText("PLAY");
+                binding.appBarMainLayout.animationView.pauseAnimation();
                 break;
 
         }
 
-        if (status.equals(PlaybackStatus.PLAYING)) {
-            binding.appBarMainLayout.btnPlayStop.setText(R.string.stop);
-            binding.appBarMainLayout.btnPlayStop.setIconResource(R.drawable.ic_stop);
-            binding.appBarMainLayout.animationView.playAnimation();
-
-        } else {
-            binding.appBarMainLayout.btnPlayStop.setText(R.string.play);
-            binding.appBarMainLayout.btnPlayStop.setIconResource(R.drawable.ic_play);
-            binding.appBarMainLayout.animationView.pauseAnimation();
-        }
-
-        binding.appBarMainLayout.btnPlayStop.setIconGravity(MaterialButton.ICON_GRAVITY_END);
 
 
     }
 
 
-}
+    @Override
+    public void onMetadataUpdated(String title, String albumArtUrl) {
+
+        //Log.e("Album art is:", albumArtUrl + "");
+        Log.e("Album art is:", title + "==" + oldTitle);
+
+        if (!oldTitle.equalsIgnoreCase(title)) {
+
+        if (!oldTitle.equalsIgnoreCase(title)) {
+            oldTitle = title;
+            Log.e("artist is:", title);
+            binding.appBarMainLayout.metaTitle.setText(title);
+            String url;
+
+            try {
+                if (albumArtUrl.contains("http")) {
+                    url = albumArtUrl.replace("\"", "").replace("\"", "");
+                } else {
+                    url = model.radioObjectLiveData.getValue().getImage();
+                }
+
+
+                Glide
+                        .with(this)
+                        .load(url)
+                        .placeholder(R.drawable.placeholder)
+                        .error(Glide.with(binding.appBarMainLayout.imageView).load(model.radioObjectLiveData.getValue().getImage()))
+                        .into(binding.appBarMainLayout.imageView);
+
+            } catch (Exception ignored) {
+            }
+        }
+
+
+    }
+
+}}

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.util.Log;
 
 
 import com.wecoders.singleradiopro.data.network.responses.Radio;
@@ -22,18 +21,16 @@ public class RadioManager {
 
     private boolean serviceBound;
 
-
+    MetadataListener callback;
 
     private static final String TAG = "RadioManager";
 
     private RadioManager(Context context) {
-        Log.d(TAG, "RadioManager: constructer");
         this.context = context;
         serviceBound = false;
     }
 
     public static RadioManager with(Context context) {
-        Log.d(TAG, "with: ");
         if (instance == null) instance = new RadioManager(context);
 
 
@@ -61,8 +58,8 @@ public class RadioManager {
             service.stopPlayer();
     }
 
-    public void bind() {
-
+    public void bind(MetadataListener callback) {
+        this.callback = callback;
         Intent intent = new Intent(context, RadioService.class);
         context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 
@@ -79,6 +76,7 @@ public class RadioManager {
         public void onServiceConnected(ComponentName arg0, IBinder binder) {
             service = ((RadioService.LocalBinder) binder).getService();
             serviceBound = true;
+            service.setCallbacks(callback);
         }
 
         @Override

@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.wecoders.singleradiopro.data.repositories.MainActivityRepository;
 import com.wecoders.singleradiopro.ui.radio.MetadataListener;
@@ -65,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         AdsUtil.loadBannerAd(this, binding.appBarMainLayout.adLayout);
 
-        setSupportActionBar(binding.appBarMainLayout.toolbar);
-        getSupportActionBar().setTitle("");
+        //setSupportActionBar(binding.appBarMainLayout.toolbar);
+        //getSupportActionBar().setTitle("");
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,34 +76,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         binding.navView.setNavigationItemSelectedListener(this);
+      /*  binding.appBarMainLayout.bottomNav.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.navigation_home) {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.END))
+                    binding.drawerLayout.closeDrawer(GravityCompat.END);
 
-        View view = binding.navView.getHeaderView(0);
-        NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.bind(view);
+            } else if (item.getItemId() == R.id.navigation_settings)
+                if (!binding.drawerLayout.isDrawerOpen(GravityCompat.END))
+                    binding.drawerLayout.openDrawer(GravityCompat.END);
+            return false;
+        });*/
 
-
-        model.getReportResponseLiveData().observe(this, response -> {
-            try {
-                Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
-            } catch (Exception ignored) {
-
-            }
-
+        binding.appBarMainLayout.btnMenu.setOnClickListener(view -> {
+            binding.drawerLayout.openDrawer(GravityCompat.END);
         });
 
-        model.getRadioLiveData().observe(this, response -> {
-            try {
-                privacyPolicyUrl = response.getPrivacyPolicy();
-                model.radio = response;
-                binding.appBarMainLayout.setRadio(response);
-                navHeaderMainBinding.setRadio(response);
 
-                Handler playHandler = new Handler();
-                playHandler.postDelayed(() -> model.onPlayClicked(null),1000);
-            } catch (Exception ignored) {
-
-            }
-
-        });
+        observeValues();
 
         drawerSwitch = (SwitchCompat) binding.navView.getMenu().findItem(R.id.nav_notification).getActionView();
         drawerSwitch.setChecked(new PrefManager<Boolean>(this).get(SWITCH_KEY, true));
@@ -120,6 +110,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+    }
+
+    private void observeValues() {
+        View view = binding.navView.getHeaderView(0);
+        NavHeaderMainBinding navHeaderMainBinding = NavHeaderMainBinding.bind(view);
+        model.getReportResponseLiveData().observe(this, response -> {
+            try {
+                Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+            } catch (Exception ignored) {
+
+            }
+
+        });
+
+        model.getRadioLiveData().observe(this, response -> {
+            try {
+                privacyPolicyUrl = response.getPrivacyPolicy();
+                model.radio = response;
+                binding.appBarMainLayout.setRadio(response);
+                navHeaderMainBinding.setRadio(response);
+
+                Handler playHandler = new Handler();
+                playHandler.postDelayed(() -> model.onPlayClicked(null), 1000);
+            } catch (Exception ignored) {
+
+            }
+
+        });
     }
 
 
@@ -201,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.END);
         return true;
     }
 
@@ -266,34 +284,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (status) {
             case PlaybackStatus.PLAYING:
-
+                binding.appBarMainLayout.btnPlayStop.setEnabled(true);
+                binding.appBarMainLayout.btnPlayStop.setIcon(getResources().getDrawable(R.drawable.ic_stop));
+                binding.appBarMainLayout.btnPlayStop.setText("STOP");
+                binding.appBarMainLayout.animationView.playAnimation();
                 break;
 
             case PlaybackStatus.LOADING:
-
-                // loading
-
+                binding.appBarMainLayout.btnPlayStop.setEnabled(false);
                 break;
 
 
             case PlaybackStatus.ERROR:
-
+                binding.appBarMainLayout.btnPlayStop.setEnabled(true);
                 Toast.makeText(this, "Error loading radio.", Toast.LENGTH_SHORT).show();
                 break;
 
             case PlaybackStatus.PAUSED:
+                binding.appBarMainLayout.btnPlayStop.setEnabled(true);
+                binding.appBarMainLayout.btnPlayStop.setIcon(getResources().getDrawable(R.drawable.ic_play));
+                binding.appBarMainLayout.btnPlayStop.setText("PLAY");
+                binding.appBarMainLayout.animationView.pauseAnimation();
                 break;
 
         }
 
-        if (status.equals(PlaybackStatus.PLAYING)) {
-            binding.appBarMainLayout.btnPlayStop.setImageResource(R.drawable.ic_stop);
-            binding.appBarMainLayout.animationView.playAnimation();
-
-        } else {
-            binding.appBarMainLayout.btnPlayStop.setImageResource(R.drawable.ic_play);
-            binding.appBarMainLayout.animationView.pauseAnimation();
-        }
 
 
     }

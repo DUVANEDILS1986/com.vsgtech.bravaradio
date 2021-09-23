@@ -23,7 +23,7 @@ public class BindingAdapters {
             Glide
                     .with(view.getContext())
                     .load(imageUri)
-                    .placeholder(R.drawable.placeholder)
+                    .placeholder(R.drawable.app_icon)
                     .into(view);
         } catch (Exception ignored) {
         }
@@ -52,7 +52,7 @@ public class BindingAdapters {
                     .with(view.getContext())
                     .load(imageUri)
                     .apply(RequestOptions.bitmapTransform(new BlurTransformation(25, 3)))
-                    .placeholder(R.drawable.placeholder)
+                    .placeholder(R.drawable.app_icon)
                     .into(view);
         } catch (Exception ignored) {
         }
